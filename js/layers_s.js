@@ -24,7 +24,7 @@ addLayer("s1", {
     row: 1,
     position: 0,
     color: "#db5563",
-    type: "none",
+    type: "null",
     startData() {
         return {
             unlocked: true,
@@ -181,7 +181,7 @@ addLayer("s2", {
     row: 2,
     position: 0,
     color: "#ab6c13",
-    type: "none",
+    type: "null",
     startData() {
         return {
             unlocked: true,
@@ -964,7 +964,7 @@ addLayer("s3", {
     row: 3,
     position: 0,
     color: "#e0e0e0",
-    type: "none",
+    type: "null",
     startData() {
         return {
             unlocked: true,

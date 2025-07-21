@@ -564,18 +564,14 @@ addLayer("m", {
         player.M.PreMv[2] = _D1
     },
     doReset(resettingLayer) {
-        if (["p", "s2"].includes(resettingLayer)) return;
+        if (["p", "s2", "m", "e"].includes(resettingLayer)) return;
 
         player.mindDream = player[this.layer].recPoints
 
-        if (["m", "e"].includes(resettingLayer)) {
+        layerDataReset("m");
 
-        } else {
-            layerDataReset("m");
-
-            player.m.upgrades.push(11);
-            player.m.milestones.push(0);
-        }
+        player.m.upgrades.push(11);
+        player.m.milestones.push(0);
     },
     layerShown() { return true },
     hotkeys: [
@@ -807,7 +803,7 @@ addLayer("e", {
         }
     },
     doReset(resettingLayer) {
-        if (["p", "s2"].includes(resettingLayer)) return;
+        if (["p", "s2", "m"].includes(resettingLayer)) return;
     },
     layerShown() { return hasMilestone("m", 3) },
     hotkeys: [
