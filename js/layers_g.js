@@ -332,7 +332,22 @@ addLayer("a", {
             done() { 
                 return player.offTime?.remain >= 12 * 3600 
             },
-            unlocked() { return hasAchievement("a", 1016) },
+            unlocked() { return hasAchievement("a", 1021) },
+            style: {
+                color: "#FFFFFF",
+                backgroundColor: "#FFD700"
+            },
+            onComplete() {
+                player.achievementsSpeed = player.achievementsSpeed.mul(1.05)
+            }
+        },
+        1022: {
+            name: "👁️ 我看不清了!",
+            tooltip: "[隐藏]迷乱!",
+            done() { 
+                return options.theme == "psycho"
+            },
+            unlocked() { return hasAchievement("a", 1022) },
             style: {
                 color: "#FFFFFF",
                 backgroundColor: "#FFD700"

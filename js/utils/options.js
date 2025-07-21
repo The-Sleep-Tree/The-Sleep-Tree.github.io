@@ -7,7 +7,7 @@ function getStartOptions() {
 		autosave: true,
 		msDisplay: "always",
 		font: "",
-		theme: "fox",
+		theme: "default",
 		hqTree: false,
 		offlineProd: true,
 		hideChallenges: false,
