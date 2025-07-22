@@ -431,7 +431,7 @@ addLayer("m", {
                 )}
                     <br>
                     ${ifElseVirable("hasMilestone('m',1)", "v", "randomString(v.length)",
-                    `"解锁一系列新的新闻,且点击新闻栏可将游戏速度+棍母倍"`
+                    `"解锁新闻,且点击新闻栏可将游戏速度+棍母倍"`
                 )}
                     `
             },
@@ -539,7 +539,7 @@ addLayer("m", {
         },
         10: {
             requirementDescription: function () {
-                return ifElseVirable("hasMilestone('m',10)", "v", "randomString(v.length)", `"10000思维 | 和我一起做梦,好么"`)
+                return ifElseVirable("hasMilestone('m',10)", "v", "randomString(v.length)", `"Inf思维 | 和我一起做梦,好么"`)
             },
             effectDescription: function () {
                 return `${ifElseVirable("hasMilestone('m',10)", "v", "randomString(v.length)",
@@ -564,9 +564,9 @@ addLayer("m", {
         player.M.PreMv[2] = _D1
     },
     doReset(resettingLayer) {
-        if (["p", "s2", "m", "e"].includes(resettingLayer)) return;
-
         player.mindDream = player[this.layer].recPoints
+        
+        if (["p", "s2", "m", "e"].includes(resettingLayer)) return;
 
         layerDataReset("m");
 

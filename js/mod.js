@@ -13,13 +13,13 @@ let modInfo = {
 
 // 在num和name中设置版本号
 let VERSION = {
-	num: "0.3.2.1 dev",
+	num: "0.3.2.2 dev",
 	name: "开发中版本,更新后存档可能不延续"
 }
 
 let changelog = `<h1>更新日志:</h1><br><br><br><br>
-	<h2>v0.3.2.1.跳进染缸 | 2025/7/22</h2><br>
-	个性化UI<br>
+	<h2>v0.3.2.2 | 2025/7/22</h2><br>
+	个性化UI,优化新闻模块<br>
 	<br><br>
 	<h2 class="c1">v0.3.2 | 2025/7/21</h2><br>
 	最初发布版,添加成就<br>
@@ -117,6 +117,7 @@ var displayNews = [
 		background-color: rgba(255,255,255,0.2);
 		margin: 5px auto;
 		border: solid 3px rgba(0,0,0,0.5);
+		min-height:24px;
 		"><span style="opacity: ${news.opacity};">${news.text}</span></div>`;
 	}
 ];
