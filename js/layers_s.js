@@ -1011,6 +1011,9 @@ addLayer("s3", {
         Hardware: {
             content: [
                 ["infobox", 0],
+                ["display-text", function () {
+                    return `<h3>[!]0.4版本将会移除萨玛定理第三世界个人电脑之后的层级数据</h3>`
+                }],
                 "main-display",
                 "main-s3-display",
                 ["display-text", function () {

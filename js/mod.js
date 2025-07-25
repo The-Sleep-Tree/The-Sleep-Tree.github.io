@@ -13,12 +13,15 @@ let modInfo = {
 
 // 在num和name中设置版本号
 let VERSION = {
-	num: "0.3.2.3 dev",
+	num: "0.3.3 dev",
 	name: "开发中版本,更新后存档可能不延续"
 }
 
-let changelog = `<h1>更新日志:</h1><br><br><br><br>
-	<h2>v0.3.2.3 | 2025/7/25</h2><br>
+let changelog = `
+	<h3>[!]0.4版本将会移除萨玛定理第三世界个人电脑之后的层级数据<br></h3>
+	<h1>更新日志:</h1><br><br><br><br>
+	<h2>v0.3.3 | 2025/7/25</h2><br>
+	残局1.14e54电子<br>
 	修复bug,添加一些有趣的东西<br>
 	个性化UI,优化新闻模块<br>
 	<br><br>
@@ -131,7 +134,7 @@ var displayThings = [
 
 // 决定游戏何时"结束"
 function isEndgame() {
-	return player.m.points.gte(_D(1e100))
+	return player.s3.points.gte(_D(1.14e54))
 }
 
 // 后面是次要内容！

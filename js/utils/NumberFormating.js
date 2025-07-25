@@ -95,6 +95,7 @@ function format(decimal, precision = 3, small) {
 
 function formatWhole(decimal) {
     decimal = new Decimal(decimal)
+    if (options.count == "exx") return format(decimal)
     if (decimal.gte(1e9)) return format(decimal)
     if (decimal.lte(0.99) && !decimal.eq(0)) return format(decimal)
     return format(decimal, 0)
