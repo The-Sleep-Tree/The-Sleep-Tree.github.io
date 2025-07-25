@@ -24,7 +24,7 @@ addLayer("s1", {
     row: 1,
     position: 0,
     color: "#db5563",
-    type: "null",
+    type: "none",
     startData() {
         return {
             unlocked: true,
@@ -165,7 +165,7 @@ addLayer("s1", {
         },
     },
     doReset(resettingLayer) {
-        if (["p", "s2"].includes(resettingLayer)) return;
+        return
     },
     layerShown() { return hasMilestone("m", 5) },
     hotkeys: [
@@ -292,7 +292,7 @@ addLayer("s2", {
 				<span><h3>${"常数发生器"}</h3></span><br>
 				<span>${"每秒获得1常数"}</span><br>
                 <span>
-                效果: ×${format(this.effect())}
+                效果: +${format(this.effect())}
 			    </span>
 				<br><br>
                 <span>
@@ -933,6 +933,9 @@ addLayer("s2", {
             completionLimit: 1
         },
     },
+    doReset(resettingLayer) {
+        return
+    },
     layerShown() { return hasMilestone("m", 6) && hasChallenge("s1", 11) },
     hotkeys: [
         {
@@ -1299,12 +1302,12 @@ addLayer("s3", {
         },
         21: {
             title: "[21]成本控制",
-            description: "每层生产成本指数-1",
+            description: "每层生产成本底数-1",
             effect: function () {
                 return _D1
             },
             effectDisplay: function () {
-                return `-^${format(upgradeEffect("s3", 21))}`
+                return `-${format(upgradeEffect("s3", 21))}`
             },
             tooltip: "",
             cost: pow10(17),
@@ -1418,6 +1421,9 @@ addLayer("s3", {
                 return hasUpgrade(this.layer, 33)
             }
         },
+    },
+    doReset(resettingLayer) {
+        return
     },
     layerShown() { return hasMilestone("m", 6) && hasChallenge("s2", 11) },
     hotkeys: [

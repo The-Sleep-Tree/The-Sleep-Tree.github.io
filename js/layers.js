@@ -161,7 +161,7 @@ addLayer("m", {
     },
     upgrades: {
         11: {
-            title: "[11]时间洪流怀表<br>[永不重置]",
+            title: "[11]时间洪流怀表",
             description: "台座效果:基础时间流速变为×60",
             effect: function () {
                 return _D60
@@ -265,7 +265,7 @@ addLayer("m", {
                 return `上一次汲取思维时的梦境数被记录,并加成${hasUpgrade("e", 21) ? "醒时和总" : "醒时"}梦境获取`
             },
             effect: function () {
-                return (player.mindDream).pow(_D(0.2)).add(_D1)
+                return (player.mindDream).pow(_D(0.25)).add(_D1)
                     .pow((hasUpgrade("m", 31) ? upgradeEffect("m", 31) : _D1))
             },
             effectDisplay: function () {
@@ -391,7 +391,7 @@ addLayer("m", {
         },
         41: {
             title: "[41]舒适的床",
-            description: "每日睡眠时间提升至8小时",
+            description: "每日睡眠时间提升至8小时,强化体验升级14",
             effect: function () {
                 return _D(7200)
             },
@@ -413,7 +413,7 @@ addLayer("m", {
     },
     milestones: {
         0: {
-            requirementDescription: "1思维 | 一觉醒来我一觉醒来,而我不变 [永不重置]",
+            requirementDescription: "1思维 | 一觉醒来我一觉醒来,而我不变",
             effectDescription: '回家吧,孩子,回家吧,躺在床上做一个春秋大梦,猪怎么过你就怎么过<br>略微降低汲取思维所需梦境,你每日的睡眠时间限制为6小时,也就是每天的0:00~6:00<br>非睡眠时间你是不会做梦的,也许生活方式的改变可以增加你的睡眠时间...',
             done() { return player[this.layer].points.gte(_D1) }
         },
@@ -565,8 +565,8 @@ addLayer("m", {
     },
     doReset(resettingLayer) {
         player.mindDream = player[this.layer].recPoints
-        
-        if (["p", "s2", "m", "e"].includes(resettingLayer)) return;
+
+        return;
 
         layerDataReset("m");
 
@@ -673,7 +673,7 @@ addLayer("e", {
     upgrades: {
         11: {
             title: "[11]反界定",
-            description: "一次可汲取多个思维",
+            description: "一次可汲取多个思维<br>获得体验前不可买",
             tooltip: "你拒绝了世界的界定",
             cost: _D0,
         },
@@ -697,9 +697,11 @@ addLayer("e", {
         },
         14: {
             title: "[14]反睡眠",
-            description: "睡眠时时间流速×2",
+            description: function () {
+                return hasUpgrade("m", 41) ? "时间流速×3" : "睡眠时时间流速×2"
+            },
             effect: function () {
-                return _D2
+                return hasUpgrade("m", 41) ?  _D3: _D2
             },
             effectDisplay: function () {
                 return `×${format(upgradeEffect("e", 14))}`
@@ -803,7 +805,7 @@ addLayer("e", {
         }
     },
     doReset(resettingLayer) {
-        if (["p", "s2", "m"].includes(resettingLayer)) return;
+        return
     },
     layerShown() { return hasMilestone("m", 3) },
     hotkeys: [

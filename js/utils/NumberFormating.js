@@ -12,6 +12,12 @@ function exponentialFormat(num, precision, mantissa = true) {
     else return "e" + e
 }
 
+function exponentialFormat_exx(num, precision) {
+    let e = num.log10()
+    e = e.toStringWithDecimalPlaces(precision)
+    return "e" + e
+}
+
 function commaFormat(num, precision) {
     if (num === null || num === undefined) return "NaN"
     if (num.mag < 0.001) return (0).toFixed(precision)
@@ -49,17 +55,32 @@ function format(decimal, precision = 3, small) {
     }
     if (decimal.sign < 0) return "-" + format(decimal.neg(), precision, small)
     if (decimal.mag == Number.POSITIVE_INFINITY) return "Infinity"
-    if (decimal.gte("eeee1000")) {
-        var slog = decimal.slog()
-        if (slog.gte(1e6)) return "F" + format(slog.floor())
-        else return Decimal.pow(10, slog.sub(slog.floor())).toStringWithDecimalPlaces(3) + "F" + commaFormat(slog.floor(), 0)
+
+    if (options.count == "xex") {
+        if (decimal.gte("eeee1000")) {
+            var slog = decimal.slog()
+            if (slog.gte(1e6)) return "F" + format(slog.floor())
+            else return Decimal.pow(10, slog.sub(slog.floor())).toStringWithDecimalPlaces(3) + "F" + commaFormat(slog.floor(), 0)
+        }
+        else if (decimal.gte("1e1000000")) return exponentialFormat(decimal, 0, false)
+        else if (decimal.gte("1e10000")) return exponentialFormat(decimal, 0)
+        else if (decimal.gte(1e9)) return exponentialFormat(decimal, precision)
+        else if (decimal.gte(1e3)) return commaFormat(decimal, 0)
+        else if (decimal.gte(0.0001) || !small) return regularFormat(decimal, precision)
+        else if (decimal.eq(0)) return (0).toFixed(precision)
+    } else if (options.count == "exx") {
+        if (decimal.gte("eeee1000")) {
+            var slog = decimal.slog()
+            if (slog.gte(1e6)) return "F" + format(slog.floor())
+            else return Decimal.pow(10, slog.sub(slog.floor())).toStringWithDecimalPlaces(3) + "F" + commaFormat(slog.floor(), 0)
+        }
+        else if (decimal.gte("1e10000")) return exponentialFormat_exx(decimal, 0)
+        else if (decimal.gte(1e3)) return exponentialFormat_exx(decimal, precision)
+        else if (decimal.gte(0.0001) || !small) return regularFormat(decimal, precision)
+        else if (decimal.eq(0)) return (0).toFixed(precision)
+    } else if (options.count == "wtf") {
+        return randomString(5)
     }
-    else if (decimal.gte("1e1000000")) return exponentialFormat(decimal, 0, false)
-    else if (decimal.gte("1e10000")) return exponentialFormat(decimal, 0)
-    else if (decimal.gte(1e9)) return exponentialFormat(decimal, precision)
-    else if (decimal.gte(1e3)) return commaFormat(decimal, 0)
-    else if (decimal.gte(0.0001) || !small) return regularFormat(decimal, precision)
-    else if (decimal.eq(0)) return (0).toFixed(precision)
 
     decimal = invertOOM(decimal)
     let val = ""

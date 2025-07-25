@@ -18,7 +18,7 @@ addLayer("a", {
                 普通进度加速时间流速×1.01<br>
                 [隐藏]特殊的事件触发的成就,加速时间流速×1.05<br>
                 [世界]发掘梦境的秘密所能获得的成就,加速时间流速×1.1<br>
-                [限定]有一定条件,当条件不满足则永久无法获取的成就,加速时间流速×1.1<br>
+                [限定]难获取,或当条件不满足则永久无法获取的成就,加速时间流速×1.1<br>
                 [小游戏]由小游戏获得的成就,加速时间流速×1.01
                 ` },
         },
@@ -124,7 +124,7 @@ addLayer("a", {
         31: {
             name: "反一切",
             tooltip: "反清醒,反睡眠",
-            done() { return hasUpgrade("e", 14) && hasUpgrade("e", 22) },
+            done() { return hasUpgrade("e", 14) && hasUpgrade("e", 21) },
             onComplete() {
                 player.achievementsSpeed = player.achievementsSpeed.mul(1.01)
             }
@@ -251,7 +251,7 @@ addLayer("a", {
         1011: {
             name: "🔋 充能大师",
             tooltip: "[隐藏]成就速度达到2倍",
-            done() { return player.achievementsSpeed.gte(_D(2)) },
+            done() { return player.achievementsSpeed.gte(_D2) },
             unlocked() { return hasAchievement("a", 1011) },
             style: {
                 color: "#FFFFFF",
@@ -329,8 +329,8 @@ addLayer("a", {
         1021: {
             name: "🕛 你来晚了",
             tooltip: "[隐藏]离线时间超过12小时",
-            done() { 
-                return player.offTime?.remain >= 12 * 3600 
+            done() {
+                return player.offTime?.remain >= 12 * 3600
             },
             unlocked() { return hasAchievement("a", 1021) },
             style: {
@@ -344,10 +344,53 @@ addLayer("a", {
         1022: {
             name: "👁️ 我看不清了!",
             tooltip: "[隐藏]迷乱!",
-            done() { 
+            done() {
                 return options.theme == "psycho"
             },
             unlocked() { return hasAchievement("a", 1022) },
+            style: {
+                color: "#FFFFFF",
+                backgroundColor: "#FFD700"
+            },
+            onComplete() {
+                player.achievementsSpeed = player.achievementsSpeed.mul(1.05)
+            }
+        },
+        1023: {
+            name: "🐜 蚂蚂蚂 蚁蚁蚁",
+            tooltip: "[隐藏]犯一个错",
+            done() {
+                return player.error
+            },
+            unlocked() { return hasAchievement("a", 1023) },
+            style: {
+                color: "#FFFFFF",
+                backgroundColor: "#FFD700"
+            },
+            onComplete() {
+                player.achievementsSpeed = player.achievementsSpeed.mul(1.05)
+            }
+        },
+        1024: {
+            name: "💫 这是什么",
+            tooltip: "[隐藏]使用奇怪的计数法",
+            done() {
+                return options.count == "wtf"
+            },
+            unlocked() { return hasAchievement("a", 1024) },
+            style: {
+                color: "#FFFFFF",
+                backgroundColor: "#FFD700"
+            },
+            onComplete() {
+                player.achievementsSpeed = player.achievementsSpeed.mul(1.05)
+            }
+        },
+        1025: {
+            name: "🔋 成就增量",
+            tooltip: "[隐藏]成就速度达到5倍",
+            done() { return player.achievementsSpeed.gte(_D5) },
+            unlocked() { return hasAchievement("a", 1025) },
             style: {
                 color: "#FFFFFF",
                 backgroundColor: "#FFD700"
@@ -426,6 +469,19 @@ addLayer("a", {
             tooltip: "[限定]在第一次思维重置之前成就速度达到2倍",
             done() { return !hasAchievement("a", 11) && hasAchievement("a", 1011) },
             unlocked() { return hasAchievement("a", 3004) },
+            style: {
+                color: "#FFFFFF",
+                backgroundColor: "#eb72ff"
+            },
+            onComplete() {
+                player.achievementsSpeed = player.achievementsSpeed.mul(1.1)
+            }
+        },
+        3005: {
+            name: "👨‍🎓 User Intelligence",
+            tooltip: "[限定]获得所有设置隐藏成就",
+            done() { return hasAchievement("a", 1001) && hasAchievement("a", 1003) && hasAchievement("a", 1016) && hasAchievement("a", 1022) && hasAchievement("a", 1023) && hasAchievement("a", 1024) },
+            unlocked() { return hasAchievement("a", 3005) },
             style: {
                 color: "#FFFFFF",
                 backgroundColor: "#eb72ff"
@@ -657,7 +713,7 @@ addLayer("a", {
         },
         4026: {
             name: "是达嘿不是大黑",
-            tooltip: "[小游戏]斯哈斯哈我的达嘿~",
+            tooltip: "[小游戏]帮帮我,溜溜溜达嘿先生!",
             done() { return hasUpgrade("p", 46) },
             unlocked() { return hasAchievement("a", 4026) },
             style: {

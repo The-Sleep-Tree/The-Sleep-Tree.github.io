@@ -112,9 +112,6 @@ var systemComponents = {
 			<br>
 			<span class="overlayThing">({{tmp.other.oompsMag != 0 ? format(tmp.other.oomps) + " OOM" + (tmp.other.oompsMag < 0 ? "^OOM" : tmp.other.oompsMag > 1 ? "^" + tmp.other.oompsMag : "") + "s" : formatSmall(getPointGen())}}/秒)
 			</span>
-			<span v-if="!canGenPoints()"  class="overlayThing" style>
-			<span class="overlayThing" id="points">[你现在是醒的]</span>
-			</span>
 			<br>
 			<span>
 			现实时间: <h3 class="overlayThing" id="points">{{new Date().toLocaleString('zh', { timeZone: 'Asia/Shanghai' })}}</h3>
@@ -122,6 +119,12 @@ var systemComponents = {
 			<span v-if="showGameTime()">
 			<br>
 			游戏时间: <h3 class="overlayThing" id="points">{{showTime(player.gameTime)}}</h3>
+			<span v-if="!canGenPoints() && timeSpeed().lte(_D(86400))"  class="overlayThing" style>
+				<span class="overlayThing" id="points">[你现在是醒的]</span>
+			</span>
+			<span v-else-if="timeSpeed().gte(_D(86400))"  class="overlayThing" style>
+				<span class="overlayThing">[防闪烁不显示]</span>
+			</span>
 			</span>
 			<span v-if="timeSpeed().neq(_D1)">
 			<br>
@@ -191,8 +194,12 @@ var systemComponents = {
             <tr>
                 <td><button class="opt" onclick="switchTheme()">主题<br>{{ getThemeName() }}</button></td>
                 <td><button class="opt" onclick="adjustFont()">字体<br>{{ FONT_DISPLAYS[FONT_SETTINGS.indexOf(options.font)] }}</button></td>
+                <td><button class="opt" onclick="adjustCount()">计数法<br>{{ COUNT_DISPLAYS[COUNT_SETTINGS.indexOf(options.count)] }}</button></td>
                 <td><button class="opt" onclick="toggleOpt('hqTree')">高质量的树<br>{{ options.hqTree?"开":"关" }}</button></td>
+            </tr>
+            <tr>
                 <td><button class="opt" onclick="toggleOpt('forceOneTab'); needsCanvasUpdate = true">页面布局<br>{{ options.forceOneTab?"单页面":"双页面" }}</button></td>
+                <td><button class="opt" onclick="player.error=true;throw(new Error('我崩溃了'));">😨</button></td>
             </tr>
             <div style="height: 1000px;"></div>
             <tr>

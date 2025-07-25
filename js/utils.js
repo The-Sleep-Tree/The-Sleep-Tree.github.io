@@ -469,7 +469,7 @@ function myTicking(diff) {
 	)
 		.mul(hasUpgrade("m", 23) ? upgradeEffect("m", 23) : _D1)
 
-	if (hasUpgrade("m", 32)) {
+	if (hasUpgrade("m", 25)) {
 		player.M.Tick[2] -= diff
 		if (player.M.Tick[2] < 0) {
 			player.M.Tick[2] = 10
@@ -544,7 +544,7 @@ function nomachineSpeed() {
 		.mul(player.achievementsSpeed)
 		.mul(hasUpgrade("m", 11) ? upgradeEffect("m", 11) : _D1)
 		.mul(hasUpgrade("m", 13) ? upgradeEffect("m", 13) : _D1)
-		.mul(hasUpgrade("e", 14) && isSleep() ? upgradeEffect("e", 14) : _D1)
+		.mul(hasUpgrade("e", 14) && (hasUpgrade("m", 41) || isSleep()) ? upgradeEffect("e", 14) : _D1)
 		.mul(layers.s1.effect()[1])
 		.mul(hasChallenge("s2", 11) ? _D3 : _D1)
 		.mul(hasUpgrade("s3", 33) ? upgradeEffect("s3", 33) : _D1)

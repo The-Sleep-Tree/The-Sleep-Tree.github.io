@@ -678,7 +678,7 @@ addLayer("p", {
             }
         },
         46: {
-            title: "嘿嘿嘿达嘿的赐福",
+            title: "溜溜溜达嘿的赐福",
             description: "无限燃料升级效果^1.031415926",
             tooltip: "第六日,赐以达嘿",
             effect: function () {

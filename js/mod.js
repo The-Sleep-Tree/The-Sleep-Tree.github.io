@@ -8,17 +8,18 @@ let modInfo = {
 	discordName: "乾狐离光的官网",
 	discordLink: "https://qhlg.flime.top/",
 	initialStartPoints: new Decimal(0), // 用于硬重置和新玩家
-	offlineLimit: 24,  // 离线时间限制（小时）
+	offlineLimit: 18,  // 离线时间限制（小时）
 }
 
 // 在num和name中设置版本号
 let VERSION = {
-	num: "0.3.2.2 dev",
+	num: "0.3.2.3 dev",
 	name: "开发中版本,更新后存档可能不延续"
 }
 
 let changelog = `<h1>更新日志:</h1><br><br><br><br>
-	<h2>v0.3.2.2 | 2025/7/22</h2><br>
+	<h2>v0.3.2.3 | 2025/7/25</h2><br>
+	修复bug,添加一些有趣的东西<br>
 	个性化UI,优化新闻模块<br>
 	<br><br>
 	<h2 class="c1">v0.3.2 | 2025/7/21</h2><br>
@@ -105,7 +106,8 @@ function addedPlayerData() {
 			Clear: 0, // 通关次数
 		},
 		// 隐藏成就
-		nevergonnagiveyouup: false
+		nevergonnagiveyouup: false,
+		error: false
 	}
 }
 

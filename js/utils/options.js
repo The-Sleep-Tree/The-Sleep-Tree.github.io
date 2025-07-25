@@ -8,6 +8,7 @@ function getStartOptions() {
 		msDisplay: "always",
 		font: "",
 		theme: "default",
+		count: "xex",
 		hqTree: false,
 		offlineProd: true,
 		hideChallenges: false,
@@ -64,6 +65,14 @@ const FONT_SETTINGS = ["", "Sligoil", "Angus", "Stepmono", "Unica", "Mathd"];
 function adjustFont() {
 	options.font = FONT_SETTINGS[(FONT_SETTINGS.indexOf(options.font) + 1) % FONT_SETTINGS.length];
 	document.body.style.setProperty("--Font", options.font);
+}
+
+const COUNT_DISPLAYS = ["常规", "对数计数法", "？？？"];
+
+const COUNT_SETTINGS = ["xex", "exx", "wtf"];
+
+function adjustCount() {
+	options.count = COUNT_SETTINGS[(COUNT_SETTINGS.indexOf(options.count) + 1) % COUNT_SETTINGS.length];
 }
 
 function milestoneShown(layer, id) {
