@@ -642,6 +642,7 @@ function loadVue() {
 	Vue.component('tooltip', systemComponents['tooltip'])
 	Vue.component('particle', systemComponents['particle'])
 	Vue.component('bg', systemComponents['bg'])
+	Vue.component('song', systemComponents['song'])
 
 
 	app = new Vue({

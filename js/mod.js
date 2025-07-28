@@ -3,7 +3,7 @@ let modInfo = {
 	id: "the-sleep-tree",
 	author: "乾狐离光",
 	pointsName: "梦境",
-	modFiles: ["layers.js","layers_s.js","layers_p.js","layers_g.js", "tree.js"],
+	modFiles: ["layers.js", "layers_s.js", "layers_p.js", "layers_g.js", "tree.js"],
 
 	discordName: "乾狐离光的官网",
 	discordLink: "https://qhlg.flime.top/",
@@ -13,23 +13,23 @@ let modInfo = {
 
 // 在num和name中设置版本号
 let VERSION = {
-	num: "0.3.3 dev",
+	num: "0.3.4 dev",
 	name: "开发中版本,更新后存档可能不延续"
 }
 
 let changelog = `
 	<h3>[!]0.4版本将会移除萨玛定理第三世界个人电脑之后的层级数据<br></h3>
 	<h1>更新日志:</h1><br><br><br><br>
-	<h2>v0.3.3 | 2025/7/25</h2><br>
+	<h2>v0.3.4 | 2025/7/28</h2><br>
 	残局1.14e54电子<br>
 	修复bug,添加一些有趣的东西<br>
 	个性化UI,优化新闻模块<br>
 	<br><br>
 	<h2 class="c1">v0.3.2 | 2025/7/21</h2><br>
-	最初发布版,添加成就<br>
+	最初发布版<br>
 	<br><br>
 	<h2>v0.3.1 | 2025/7/20</h2><br>
-	重做萨玛定理第二世界平衡,扩充内容,添加成就<br>
+	重做萨玛定理第二世界平衡,扩充内容<br>
 	乾狐离光睡了一觉<br><br>
 	<h2>v0.3 | 2025/7/18</h2><br>
 	搭建了萨玛定理第三世界框架<br>
@@ -45,7 +45,7 @@ let changelog = `
 let winText = `哦不!你已经玩到这个开发版本的最后了,敬请期待下一个版本的更新!`
 
 // 如果在Layer内添加了新函数，并且这些函数在被调用时会产生效果，请在此处添加它们
-var doNotCallTheseFunctionsEveryTick = ["annihilation","canBuyCount"]
+var doNotCallTheseFunctionsEveryTick = ["annihilation", "canBuyCount"]
 
 function getStartPoints() {
 	return new Decimal(modInfo.initialStartPoints)

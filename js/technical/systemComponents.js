@@ -253,6 +253,20 @@ var systemComponents = {
 		props: ['layer'],
 		template: `<div class ="bg" v-bind:style="[tmp[layer].style ? tmp[layer].style : {}, (tmp[layer].tabFormat && !Array.isArray(tmp[layer].tabFormat)) ? tmp[layer].tabFormat[player.subtabs[layer].mainTabs].style : {}]"></div>
 		`
+	},
+
+	'song': {
+		template: `<div v-if="hasUpgrade('e',33)" style="
+			position: fixed;
+            left: 20px;
+            bottom: 20px;
+            z-index: 1000;
+        ">
+        	<audio controls style="width:calc(50vw - 50px)">
+        	    <source src="/song/groove33edo.mp3" type="audio/mpeg">
+        	    您的浏览器不支持 audio 元素。
+        	</audio>
+		</div>`
 	}
 
 }

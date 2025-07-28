@@ -141,7 +141,7 @@ addLayer("s1", {
             name: "呜",
             challengeDescription() {
                 return "喵呜!喵喵,喵喵喵!咪咪喵~喵!<br>挑战时请勿刷新页面" +
-                    (inChallenge(this.layer, 11) ? `<br>HP ${format(layers[this.layer].bosshp)}/10000` : "")
+                    (inChallenge(this.layer, 11) ? `<br>HP ${format(layers[this.layer].bosshp)}/${format(10000)}` : "")
             },
             goalDescription() {
                 return "喵喵,喵喵喵!"
@@ -326,7 +326,7 @@ addLayer("s2", {
 			    </span>
 				<br><br>
                 <span>
-                开销: ${formatWhole(this.price())} 对数
+                开销: ${format(this.price(),1)} 对数
 			    </span>
             `
             },
@@ -359,7 +359,7 @@ addLayer("s2", {
 			    </span>
 				<br><br>
                 <span>
-                开销: ${formatWhole(this.price())} 对数
+                开销: ${format(this.price(),1)} 对数
 			    </span>
             `
             },
@@ -392,7 +392,7 @@ addLayer("s2", {
 			    </span>
 				<br><br>
                 <span>
-                开销: ${formatWhole(this.price())} 对数
+                开销: ${format(this.price(),1)} 对数
 			    </span>
             `
             },
@@ -426,7 +426,7 @@ addLayer("s2", {
 			    </span>
 				<br><br>
                 <span>
-                开销: ${formatWhole(this.price())} 对数
+                开销: ${format(this.price(),1)} 对数
 			    </span>
             `
             },
@@ -460,7 +460,7 @@ addLayer("s2", {
 			    </span>
 				<br><br>
                 <span>
-                开销: ${formatWhole(this.price())} 对数
+                开销: ${format(this.price(),1)} 对数
 			    </span>
             `
             },
@@ -494,7 +494,7 @@ addLayer("s2", {
 			    </span>
 				<br><br>
                 <span>
-                开销: ${formatWhole(this.price())} 对数
+                开销: ${format(this.price(),1)} 对数
 			    </span>
             `
             },
@@ -529,7 +529,7 @@ addLayer("s2", {
 			    </span>
 				<br><br>
                 <span>
-                开销: ${formatWhole(this.price())} 对数
+                开销: ${format(this.price(),1)} 对数
 			    </span>
             `
             },
@@ -564,7 +564,7 @@ addLayer("s2", {
 			    </span>
 				<br><br>
                 <span>
-                开销: ${formatWhole(this.price())} 对数
+                开销: ${format(this.price(),1)} 对数
 			    </span>
             `
             },
@@ -599,7 +599,7 @@ addLayer("s2", {
 			    </span>
 				<br><br>
                 <span>
-                开销: ${formatWhole(this.price())} 对数
+                开销: ${format(this.price(),1)} 对数
 			    </span>
             `
             },
@@ -634,7 +634,7 @@ addLayer("s2", {
 			    </span>
 				<br><br>
                 <span>
-                开销: ${formatWhole(this.price())} 对数
+                开销: ${format(this.price(),1)} 对数
 			    </span>
             `
             },
@@ -669,7 +669,7 @@ addLayer("s2", {
 			    </span>
 				<br><br>
                 <span>
-                开销: ${formatWhole(this.price())} 对数
+                开销: ${format(this.price(),1)} 对数
 			    </span>
             `
             },
@@ -703,7 +703,7 @@ addLayer("s2", {
 			    </span>
 				<br><br>
                 <span>
-                开销: ${formatWhole(this.price())} 对数
+                开销: ${format(this.price(),1)} 对数
 			    </span>
             `
             },
@@ -734,7 +734,7 @@ addLayer("s2", {
 				<span>${"并将其涂在答题卡上"}</span><br>
                 <br>
                 <span>
-                开销: ${formatWhole(this.price())} 对数
+                开销: ${format(this.price(),1)} 对数
 			    </span>
             `
             },
@@ -760,7 +760,7 @@ addLayer("s2", {
 				<span>${"并将其涂在答题卡上"}</span><br>
                 <br>
                 <span>
-                开销: ${formatWhole(this.price())} 对数
+                开销: ${format(this.price(),1)} 对数
 			    </span>
             `
             },
@@ -786,7 +786,7 @@ addLayer("s2", {
 				<span>${"并将其涂在答题卡上"}</span><br>
                 <br>
                 <span>
-                开销: ${formatWhole(this.price())} 对数
+                开销: ${format(this.price(),1)} 对数
 			    </span>
             `
             },
@@ -812,7 +812,7 @@ addLayer("s2", {
 				<span>${"并将其涂在答题卡上"}</span><br>
                 <br>
                 <span>
-                开销: ${formatWhole(this.price())} 对数
+                开销: ${format(this.price(),1)} 对数
 			    </span>
             `
             },
@@ -838,7 +838,7 @@ addLayer("s2", {
 				<span>${hasChallenge("s2", 11) ? "每次湮灭后以50对数为起点" : "一次性获得很多对数,你要好好使用哦!"}</span><br>
                 <br>
                 <span>
-                开销: ${formatWhole(this.price())} 对数
+                开销: ${format(this.price(),1)} 对数
 			    </span>
             `
             },
@@ -865,7 +865,7 @@ addLayer("s2", {
 				<span>${"你是没发现走错路还是直奔我这个成就来的?"}</span><br>
                 <br>
                 <span>
-                开销: ${formatWhole(this.price())} 对数
+                开销: ${format(this.price(),1)} 对数
 			    </span>
             `
             },
@@ -890,7 +890,7 @@ addLayer("s2", {
 				<span>${"获得引理证明机"}</span><br>
                 <br>
                 <span>
-                开销: ${formatWhole(this.price())} 对数
+                开销: ${format(this.price(),1)} 对数
 			    </span>
             `
             },
@@ -975,8 +975,8 @@ addLayer("s3", {
         }
     },
     getTech() {
-        return nomachineSpeed().pow(
-            _D(0.5)
+        return _D100.pow(
+            _D(1)
                 .add(hasUpgrade("s3", 31) ? upgradeEffect("s3", 31) : _D0)
         )
             .mul(hasUpgrade("s3", 13) ? upgradeEffect("s3", 13) : _D1)

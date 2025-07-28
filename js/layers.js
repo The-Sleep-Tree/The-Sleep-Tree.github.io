@@ -396,18 +396,27 @@ addLayer("m", {
                 return _D(7200)
             },
             tooltip: "一张床就能让你的人生变得更美妙,不是吗?",
-            cost: _D(50),
+            cost: _D(60),
             unlocked() {
-                return hasUpgrade(this.layer, 35)
+                return hasUpgrade(this.layer, 35) && hasChallenge("s1", 11)
             }
         },
         42: {
             title: "[42]猫的力量",
             description: "梦境获取乘以一个新的变量Mv3",
             tooltip: "Mv3基于Mv1和Mv2的算术平方根",
-            cost: _D(60),
+            cost: _D(90),
             unlocked() {
-                return hasUpgrade(this.layer, 41) && hasChallenge("s1", 11)
+                return hasUpgrade(this.layer, 41)
+            }
+        },
+        43: {
+            title: "[43]时间修正",
+            description: "汲取梦境不再重置游戏时间",
+            tooltip: "Mv3基于Mv1和Mv2的算术平方根",
+            cost: _D(120),
+            unlocked() {
+                return hasUpgrade(this.layer, 42)
             }
         },
     },
@@ -559,9 +568,10 @@ addLayer("m", {
         },
     },
     onPrestige(gain) {
-        player.gameTime = _D0
+        if (!hasUpgrade("m", 43)) player.gameTime = _D0
         player.M.Mv[2] = _D1
         player.M.PreMv[2] = _D1
+        player.M.Mv[3] = _D1
     },
     doReset(resettingLayer) {
         player.mindDream = player[this.layer].recPoints
@@ -632,7 +642,6 @@ addLayer("e", {
     recPoints: _D0,
     mindDream: _D0,
     update(diff) {
-        player[this.layer].recPoints = player.points
     },
     startData() {
         return {
@@ -701,7 +710,7 @@ addLayer("e", {
                 return hasUpgrade("m", 41) ? "时间流速×3" : "睡眠时时间流速×2"
             },
             effect: function () {
-                return hasUpgrade("m", 41) ?  _D3: _D2
+                return hasUpgrade("m", 41) ? _D3 : _D2
             },
             effectDisplay: function () {
                 return `×${format(upgradeEffect("e", 14))}`
@@ -768,7 +777,7 @@ addLayer("e", {
             description: "大幅增强思维升级12的效果",
             tooltip: "你想要更极致的,更纯粹的...",
             effect: function () {
-                return _D(0.4)
+                return _D(0.5)
             },
             effectDisplay: function () {
                 return `+^${format(upgradeEffect("e", 25))}`
@@ -790,9 +799,27 @@ addLayer("e", {
             effectDisplay: function () {
                 return `/${format(upgradeEffect("e", 31)[0])}<br>-^${format(upgradeEffect("e", 31)[1])}`
             },
-            cost: _D(36),
+            cost: _D(35),
             unlocked() {
-                return hasUpgrade(this.layer, 24)
+                return hasUpgrade(this.layer, 25)
+            }
+        },
+        32: {
+            title: "[32]正激励",
+            description: "获得一个成就",
+            tooltip: "我会给你除了帮助以外的所有支持",
+            cost: _D(45),
+            unlocked() {
+                return hasUpgrade(this.layer, 31)
+            }
+        },
+        33: {
+            title: "[33]正音乐",
+            description: "获得groove 32edo",
+            tooltip: "",
+            cost: _D(55),
+            unlocked() {
+                return hasUpgrade(this.layer, 25)
             }
         },
     },

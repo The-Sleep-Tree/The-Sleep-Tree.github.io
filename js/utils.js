@@ -486,7 +486,7 @@ function myTicking(diff) {
 	}
 
 	if (hasUpgrade("m", 42)) {
-		let spd = (_D(1).sub(divNum(_D(1e4))))
+		let spd = (_D(1).sub(divNum(_D(3.14e3))))
 			.pow(nomachineSpeed().pow(_D(0.3)))
 		player.M.Mv[3] = (player.M.Mv[3].pow(spd)).mul(
 			(player.M.Mv[2].mul(player.M.Mv[1]).pow(divNum(_D2))).pow(_D1.sub(spd))
@@ -675,7 +675,7 @@ function getNewsList() {
 				' <img src="./resources/pic1.jpg" width="60px">',
 				"@生产睡觉树的我睡觉时生产睡觉树",
 				"白 白 东东东东 南南南南 西西西西 北北北北",
-				"☆<<<<<<<<<<<<<<<",
+				"MISS☆<<<<<<<<<<<<<<<",
 				"事已至此,先睡觉吧",
 				`进行人机验证才能阅读此新闻<input type="button" value="人机验证" onclick="alert('您不是人类!');"/>`,
 				`我懒得写新闻了,你自己写吧<input type="text"placeholder="请输入新闻">`,
