@@ -18,7 +18,13 @@ function getStartOptions() {
 		forceTooltips: true,
 		hideMilestonePopups: false,
 		badWeb: false,
+		songshown: true
 	}
+}
+
+function getOpt(name) {
+	if(typeof options == 'undefined') return false
+	return options[name]
 }
 
 function toggleOpt(name) {
@@ -95,4 +101,6 @@ function milestoneShown(layer, id) {
 	return false;
 }
 
-let formatOption = (opt) => opt ? 'ON' : 'OFF'
+function formatOption(opt) {
+	return options[opt] ? '启用' : '关闭'
+}

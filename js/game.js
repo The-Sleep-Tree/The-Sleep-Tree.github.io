@@ -410,7 +410,7 @@ var interval = setInterval(function() {
 	let now = Date.now()
 	let diff = (now - player.time) / 1e3
 	let trueDiff = diff
-	if (new Date().getHours() >= 0 && new Date().getHours() < 6) diff = 0;
+	if (new Date().getHours() >= 0 && new Date().getHours() < 1) diff = 0;
 	if (player.offTime !== undefined) {
 		if (player.offTime.remain > modInfo.offlineLimit * 3600) player.offTime.remain = modInfo.offlineLimit * 3600
 		if (player.offTime.remain > 0) {

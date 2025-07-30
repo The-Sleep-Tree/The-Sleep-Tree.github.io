@@ -156,6 +156,10 @@ var systemComponents = {
             <br>
             模组树汉化 乾狐离光
         </span>
+        <br>
+        <ct>
+            游玩 你
+		</ct>
 		<br>
 		<br>
 		<img src="./resources/QHLG.jpg" width="128px"/>
@@ -181,9 +185,9 @@ var systemComponents = {
         <table>
             <tr>
                 <td><button class="opt" onclick="save()">保存</button></td>
-                <td><button class="opt" onclick="toggleOpt('autosave')">自动保存<br>{{ options.autosave?"开":"关" }}</button></td>
+                <td><button class="opt" onclick="toggleOpt('autosave')">自动保存<br>{{ formatOption('autosave') }}</button></td>
                 <td><button class="opt" onclick="hardReset()">硬重置</button></td>
-                <td><button class="opt" onclick="toggleOpt('offlineProd');">离线进度<br>{{ options.offlineProd?"开":"关" }}</button></td>
+                <td><button class="opt" onclick="toggleOpt('offlineProd');">离线进度<br>{{ formatOption('offlineProd') }}</button></td>
             </tr>
             <tr>
                 <td><button class="opt" onclick="exportSave()">导出存档<br/>到剪贴板</button></td>
@@ -195,12 +199,15 @@ var systemComponents = {
                 <td><button class="opt" onclick="switchTheme()">主题<br>{{ getThemeName() }}</button></td>
                 <td><button class="opt" onclick="adjustFont()">字体<br>{{ FONT_DISPLAYS[FONT_SETTINGS.indexOf(options.font)] }}</button></td>
                 <td><button class="opt" onclick="adjustCount()">计数法<br>{{ COUNT_DISPLAYS[COUNT_SETTINGS.indexOf(options.count)] }}</button></td>
-                <td><button class="opt" onclick="toggleOpt('hqTree')">高质量的树<br>{{ options.hqTree?"开":"关" }}</button></td>
+                <td><button class="opt" onclick="toggleOpt('hqTree')">高质量的树<br>{{ formatOption('hqTree') }}</button></td>
             </tr>
             <tr>
                 <td><button class="opt" onclick="toggleOpt('forceOneTab'); needsCanvasUpdate = true">页面布局<br>{{ options.forceOneTab?"单页面":"双页面" }}</button></td>
                 <td><button class="opt" onclick="player.error=true;throw(new Error('我崩溃了'));">😨</button></td>
             </tr>
+			<tr>
+				<td><button class="opt" onclick="toggleOpt('songshown')">BGM显示<br>{{ formatOption('songshown') }}</button></td>
+			</tr>
             <div style="height: 1000px;"></div>
             <tr>
                 <td><button class="opt" onclick="toggleOpt('badWeb');reinitializeNews();">联网获取新闻<br>{{ options.badWeb?"开":"关" }}</button></td>
@@ -210,7 +217,7 @@ var systemComponents = {
 	},
 
 	'mypic': {
-		template: `<img v-if="options.badWeb" src="https://api.1550187725.workers.dev/" alt="图片未加载" width= "50%" style="border-radius: 10%"/>`
+		template: `<img v-if="options.badWeb" src="https://api.1550187725.workers.dev/" alt="图片未加载,可能需要加速器" width= "50%"/>`
 	},
 
 	'back-button': {
@@ -256,18 +263,35 @@ var systemComponents = {
 	},
 
 	'song': {
-		template: `<div v-if="hasUpgrade('e',33)" style="
-			position: fixed;
-            left: 20px;
-            bottom: 20px;
-            z-index: 1000;
-        ">
-        	<audio controls style="width:calc(50vw - 50px)">
-        	    <source src="/song/groove33edo.mp3" type="audio/mpeg">
-        	    您的浏览器不支持 audio 元素。
-        	</audio>
-		</div>`
+		props: ['songshown'],
+		template: `<div v-if="hasUpgrade('e',33)" :style="{
+        position: 'fixed',
+        left: '20px',
+        bottom: songshown ? '20px' : '-65px',
+        'z-index': '100000'
+    }">
+        <p :style="{
+    	    opacity: songshown ? 0 : 1
+    	}"
+		>你可在设置调整BGM显示</p>
+		<br>
+        <audio controls style="width:calc(50vw - 50px)"
+        controlsList="nodownload noplaybackrate"
+        loop>
+            <source src="/song/groove33edo.mp3" type="audio/mpeg">
+            您的浏览器不支持 audio 元素。
+        </audio>
+    </div>`
+	},
+
+	'ct': {
+		template: `
+			<span class="cover" title="你知道的太多了">
+			  <slot></slot>
+			</span>
+		`
 	}
+
 
 }
 

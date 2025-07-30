@@ -20,9 +20,9 @@ let VERSION = {
 let changelog = `
 	<h3>[!]0.4版本将会移除萨玛定理第三世界个人电脑之后的层级数据<br></h3>
 	<h1>更新日志:</h1><br><br><br><br>
-	<h2>v0.3.4 | 2025/7/28</h2><br>
-	残局1.14e54电子<br>
-	修复bug,添加一些有趣的东西<br>
+	<h2>v0.3.5 | 2025/7/31</h2><br>
+	残局1e15电子<br>
+	修复bug,继续完善萨玛第三世界<br>
 	个性化UI,优化新闻模块<br>
 	<br><br>
 	<h2 class="c1">v0.3.2 | 2025/7/21</h2><br>
@@ -97,7 +97,9 @@ function addedPlayerData() {
 			t42: 10
 		},
 		S3: {
+			world: 0, //转生
 			tech: _D0,
+			wisdom: _D0,
 			layer: 1
 		},
 		// 小游戏参数
@@ -134,7 +136,7 @@ var displayThings = [
 
 // 决定游戏何时"结束"
 function isEndgame() {
-	return player.s3.points.gte(_D(1.14e54))
+	return player.s3.points.gte(_D(1e15))
 }
 
 // 后面是次要内容！

@@ -326,7 +326,7 @@ addLayer("s2", {
 			    </span>
 				<br><br>
                 <span>
-                开销: ${format(this.price(),1)} 对数
+                开销: ${format(this.price(), 1)} 对数
 			    </span>
             `
             },
@@ -359,7 +359,7 @@ addLayer("s2", {
 			    </span>
 				<br><br>
                 <span>
-                开销: ${format(this.price(),1)} 对数
+                开销: ${format(this.price(), 1)} 对数
 			    </span>
             `
             },
@@ -392,7 +392,7 @@ addLayer("s2", {
 			    </span>
 				<br><br>
                 <span>
-                开销: ${format(this.price(),1)} 对数
+                开销: ${format(this.price(), 1)} 对数
 			    </span>
             `
             },
@@ -420,13 +420,13 @@ addLayer("s2", {
             fullDisplay() {
                 return `
 				<span><h3>${"对错膨胀机"}</h3></span><br>
-				<span>${(hasUpgrade("s2",43)?"对数每秒膨胀一个小于100但大于0的百分比":"对数和错数每秒膨胀一个小于100但大于0的百分比")+(hasChallenge("s2", 11) ?"<br>999对数后不再生效":"")}</span><br>
+				<span>${(hasUpgrade("s2", 43) ? "对数每秒膨胀一个小于100但大于0的百分比" : "对数和错数每秒膨胀一个小于100但大于0的百分比") + (hasChallenge("s2", 11) ? "<br>999对数后不再生效" : "")}</span><br>
                 <span>
                 效果: ${format(this.effect())}%
 			    </span>
 				<br><br>
                 <span>
-                开销: ${format(this.price(),1)} 对数
+                开销: ${format(this.price(), 1)} 对数
 			    </span>
             `
             },
@@ -460,7 +460,7 @@ addLayer("s2", {
 			    </span>
 				<br><br>
                 <span>
-                开销: ${format(this.price(),1)} 对数
+                开销: ${format(this.price(), 1)} 对数
 			    </span>
             `
             },
@@ -494,7 +494,7 @@ addLayer("s2", {
 			    </span>
 				<br><br>
                 <span>
-                开销: ${format(this.price(),1)} 对数
+                开销: ${format(this.price(), 1)} 对数
 			    </span>
             `
             },
@@ -529,7 +529,7 @@ addLayer("s2", {
 			    </span>
 				<br><br>
                 <span>
-                开销: ${format(this.price(),1)} 对数
+                开销: ${format(this.price(), 1)} 对数
 			    </span>
             `
             },
@@ -564,7 +564,7 @@ addLayer("s2", {
 			    </span>
 				<br><br>
                 <span>
-                开销: ${format(this.price(),1)} 对数
+                开销: ${format(this.price(), 1)} 对数
 			    </span>
             `
             },
@@ -599,7 +599,7 @@ addLayer("s2", {
 			    </span>
 				<br><br>
                 <span>
-                开销: ${format(this.price(),1)} 对数
+                开销: ${format(this.price(), 1)} 对数
 			    </span>
             `
             },
@@ -634,7 +634,7 @@ addLayer("s2", {
 			    </span>
 				<br><br>
                 <span>
-                开销: ${format(this.price(),1)} 对数
+                开销: ${format(this.price(), 1)} 对数
 			    </span>
             `
             },
@@ -669,7 +669,7 @@ addLayer("s2", {
 			    </span>
 				<br><br>
                 <span>
-                开销: ${format(this.price(),1)} 对数
+                开销: ${format(this.price(), 1)} 对数
 			    </span>
             `
             },
@@ -703,7 +703,7 @@ addLayer("s2", {
 			    </span>
 				<br><br>
                 <span>
-                开销: ${format(this.price(),1)} 对数
+                开销: ${format(this.price(), 1)} 对数
 			    </span>
             `
             },
@@ -734,7 +734,7 @@ addLayer("s2", {
 				<span>${"并将其涂在答题卡上"}</span><br>
                 <br>
                 <span>
-                开销: ${format(this.price(),1)} 对数
+                开销: ${format(this.price(), 1)} 对数
 			    </span>
             `
             },
@@ -760,7 +760,7 @@ addLayer("s2", {
 				<span>${"并将其涂在答题卡上"}</span><br>
                 <br>
                 <span>
-                开销: ${format(this.price(),1)} 对数
+                开销: ${format(this.price(), 1)} 对数
 			    </span>
             `
             },
@@ -786,7 +786,7 @@ addLayer("s2", {
 				<span>${"并将其涂在答题卡上"}</span><br>
                 <br>
                 <span>
-                开销: ${format(this.price(),1)} 对数
+                开销: ${format(this.price(), 1)} 对数
 			    </span>
             `
             },
@@ -812,7 +812,7 @@ addLayer("s2", {
 				<span>${"并将其涂在答题卡上"}</span><br>
                 <br>
                 <span>
-                开销: ${format(this.price(),1)} 对数
+                开销: ${format(this.price(), 1)} 对数
 			    </span>
             `
             },
@@ -838,7 +838,7 @@ addLayer("s2", {
 				<span>${hasChallenge("s2", 11) ? "每次湮灭后以50对数为起点" : "一次性获得很多对数,你要好好使用哦!"}</span><br>
                 <br>
                 <span>
-                开销: ${format(this.price(),1)} 对数
+                开销: ${format(this.price(), 1)} 对数
 			    </span>
             `
             },
@@ -865,7 +865,7 @@ addLayer("s2", {
 				<span>${"你是没发现走错路还是直奔我这个成就来的?"}</span><br>
                 <br>
                 <span>
-                开销: ${format(this.price(),1)} 对数
+                开销: ${format(this.price(), 1)} 对数
 			    </span>
             `
             },
@@ -890,7 +890,7 @@ addLayer("s2", {
 				<span>${"获得引理证明机"}</span><br>
                 <br>
                 <span>
-                开销: ${format(this.price(),1)} 对数
+                开销: ${format(this.price(), 1)} 对数
 			    </span>
             `
             },
@@ -974,6 +974,9 @@ addLayer("s3", {
             points: _D10
         }
     },
+    getWisdom() {
+        return buyableEffect("s3", 12)[0]
+    },
     getTech() {
         return _D100.pow(
             _D(1)
@@ -985,6 +988,8 @@ addLayer("s3", {
             .mul(hasUpgrade("s3", 32) ? upgradeEffect("s3", 32) : _D1)
     },
     update(diff) {
+        if (!layers[this.layer].layerShown()) return;
+
         player["S3"].tech = player["S3"].tech.add(this.getTech().mul(diff))
 
         player[this.layer].points = player[this.layer].points.add(
@@ -994,6 +999,9 @@ addLayer("s3", {
             let addtion = gridEffect(this.layer, i * 100 + 1).mul(diff)
             setGridData(this.layer, i * 100 - 99, getGridData(this.layer, i * 100 - 99).add(addtion))
         }
+
+        if (!hasUpgrade('s3', 101)) return;
+        player["S3"].wisdom = player["S3"].wisdom.add(this.getWisdom().mul(diff))
     },
     infoboxes: {
         0: {
@@ -1015,9 +1023,13 @@ addLayer("s3", {
                     return `<h3>[!]0.4版本将会移除萨玛定理第三世界个人电脑之后的层级数据</h3>`
                 }],
                 "main-display",
-                "main-s3-display",
+                "main-s3-tech-display",
                 ["display-text", function () {
                     return `(${formatWhole(layers[this.layer].getTech())}/秒)`
+                }],
+                () => { return hasUpgrade('s3', 101) ? "main-s3-wisdom-display" : "" },
+                ["display-text", function () {
+                    return hasUpgrade('s3', 101) ? `(${format(layers[this.layer].getWisdom())}/秒)` : ""
                 }],
                 "blank",
                 ["display-text", function () {
@@ -1032,19 +1044,55 @@ addLayer("s3", {
             content: [
                 ["infobox", 0],
                 "main-display",
-                "main-s3-display",
+                "main-s3-tech-display",
                 ["display-text", function () {
                     return `(${formatWhole(layers[this.layer].getTech())}/秒)`
                 }],
                 "blank",
                 "upgrades"
             ]
+        },
+        Wisdom: {
+            content: [
+                () => { return hasUpgrade('s3', 101) ? "main-s3-wisdom-display" : "" },
+                ["display-text", function () {
+                    return hasUpgrade('s3', 101) ? `(${format(layers[this.layer].getWisdom())}/秒)` : ""
+                }],
+                "blank",
+                ['bar', 'WisdomBar'],
+                "blank",
+                "buyables"
+            ],
+            unlocked() {
+                return hasUpgrade('s3', 101)
+            }
+        },
+        World: {
+            content: [
+                ["display-text", function () {
+                    return `你的世界维度在 <h1 id="points">${player['S3'].world + 3}</h1> 维`
+                }],
+            ],
+            unlocked() {
+                return player['S3'].world != 0 || hasUpgrade('s3', 101)
+            }
         }
     },
+    bars: {
+        WisdomBar: {
+            direction: RIGHT,
+            width: 400,
+            height: 45,
+            progress() { return player["S3"].wisdom.div(buyableEffect("s3", 11)) },
+            display() {
+                return `<h3>${formatWhole(player["S3"].wisdom)}/${formatWhole(buyableEffect("s3", 11))}</h3>`
+            }
+        },
+    },
     grid: {
-        rows() { return hasUpgrade("s3", 12) ? player["S3"].layer : Math.min(2, player["S3"].layer) },
+        rows() { return Math.min(player["S3"].world + 7, hasUpgrade("s3", 12) ? player["S3"].layer : Math.min(2, player["S3"].layer)) },
         cols: 3,
-        maxRows: 14,
+        maxRows: 15,
         getLayer(id) {
             return layer = ~~(id / 100);
         },
@@ -1098,7 +1146,8 @@ addLayer("s3", {
                 "行星计算机集群",
                 "戴森球网络",
                 "黑洞计算机",
-                "宇宙模拟器"
+                "宇宙模拟器",
+                "真理"
             ][layer - 1]
         },
         getStartData() {
@@ -1212,7 +1261,12 @@ addLayer("s3", {
         getStyle(data, id) {
             switch (id % 100) {
                 case 1:
-                    return {
+                    if (id == 1501) return {
+                        width: "624px",
+                        height: "135px",
+                        fontSize: "0.9em",
+                    }
+                    else return {
                         width: "300px",
                         height: "135px",
                         fontSize: "0.9em",
@@ -1232,11 +1286,111 @@ addLayer("s3", {
             }
         },
         getUnlocked(id) {
-            if (id == 1402 || id == 1403) return false
+            if (id == 1502 || id == 1503) return false
             return true
         }
     },
+    buyables: {
+        11: {
+            title: function () {
+                return `大脑<br>Lv ${getBuyableAmount("s3", 11)}`
+            },
+            display() {
+                return `
+                    <h3>思维的容器</h3><br><h3>思维上限被设为 <h2>${format(buyableEffect("s3", 11))}</h2> 点</h3><br><br><h3>开销: 5智慧</h3>
+                `
+            },
+            cost() {
+                return _D(5)
+            },
+            effect(x) {
+                return getYFromOrderedPoints(
+                    [
+                        [0, 1000],
+                        [10, 1500],
+                        [50, 2000],
+                        [100, 2500],
+                        [300, 3000],
+                        [900, 3500],
+                        [2500, 4000],
+                        [5000, 4500],
+                        [10000, 5000],
+                        [20000, 5500],
+                        [40000, 6000],
+                        [80000, 6500],
+                        [100000, 6666]
+                    ]
+                    , x
+                ).mul(buyableEffect("s3", 12)[1])
+            },
+            canAfford() { return player['S3'].wisdom.gte(this.cost()) },
+            buy() {
+                if (!this.canAfford()) return;
+                if (getBuyableAmount("s3", 11).gte(this.purchaseLimit())) return;
+                player['S3'].wisdom = (player['S3'].wisdom).sub(this.cost())
+                addBuyables("s3", 11, _D1)
+            },
+            purchaseLimit: function () {
+                return pow10(5)
+            }
+        },
+        12: {
+            title: function () {
+                return `意识<br>Lv ${getBuyableAmount("s3", 12)}`
+            },
+            display() {
+                return `
+                    <h3>思考的前提是意识</h3><br><h3>每秒获得 <h2>${format(buyableEffect("s3", 12)[0])}</h2> 智慧</h3><br><h3>并提升智慧容量至 <h2>${format(buyableEffect("s3", 12)[1])}</h2> 倍</h3><br><br><h3>开销: ${this.cost()}智慧</h3>
+                `
+            },
+            cost() {
+                let x = getBuyableAmount("s3", 12)
+                return _D([
+                    80,
+                    150,
+                    300,
+                    600,
+                    1350,
+                    3000,
+                    6400,
+                    12990
+                ][x])
+            },
+            effect(x) {
+                return [_D([
+                    0.2,
+                    0.4,
+                    0.8,
+                    1.5,
+                    3,
+                    5,
+                    8,
+                    10
+                ][x]),_D(1.1).pow(x)]
+            },
+            canAfford() { return player['S3'].wisdom.gte(this.cost()) },
+            buy() {
+                if (!this.canAfford()) return;
+                if (getBuyableAmount("s3", 12).gte(this.purchaseLimit())) return;
+                player['S3'].wisdom = (player['S3'].wisdom).sub(this.cost())
+                addBuyables("s3", 12, _D1)
+            },
+            purchaseLimit: function () {
+                return _D7
+            }
+        },
+    },
     upgrades: {
+        101: {
+            title: "智慧",
+            description: "解锁大脑",
+            tooltip: "",
+            cost() {
+                return [
+                    pow10(15)
+                ][player['S3'].world]
+            },
+        },
         11: {
             title: "[11]晶体管",
             description: "真空管升级为晶体管,基础产量×3",

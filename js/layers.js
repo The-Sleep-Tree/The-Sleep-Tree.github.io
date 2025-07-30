@@ -411,8 +411,17 @@ addLayer("m", {
             }
         },
         43: {
-            title: "[43]时间修正",
+            title: "[43]修正力量",
             description: "汲取梦境不再重置游戏时间",
+            tooltip: "Mv3基于Mv1和Mv2的算术平方根",
+            cost: _D(120),
+            unlocked() {
+                return hasUpgrade(this.layer, 42)
+            }
+        },
+        44: {
+            title: "[44]科技能量",
+            description: "",
             tooltip: "Mv3基于Mv1和Mv2的算术平方根",
             cost: _D(120),
             unlocked() {
@@ -815,7 +824,7 @@ addLayer("e", {
         },
         33: {
             title: "[33]正音乐",
-            description: "获得groove 32edo",
+            description: "获得groove 33edo",
             tooltip: "",
             cost: _D(55),
             unlocked() {

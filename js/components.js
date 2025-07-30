@@ -253,13 +253,20 @@ function loadVue() {
 		`
 	})
 	
-	Vue.component('main-s3-display', {
+	Vue.component('main-s3-tech-display', {
 		props: ['layer', 'data'],
 		template: `
 		<div><span v-if="player['S3'].tech.lt('1e1000')">你有 </span><h2 v-bind:style="{'color': tmp[layer].color, 'text-shadow': '0px 0px 10px ' + tmp[layer].color}">{{formatWhole(player['S3'].tech)}}</h2> 科技<span v-if="layers[layer].effectDescription"></span></span></div>
 		`
 	})
 	
+	Vue.component('main-s3-wisdom-display', {
+		props: ['layer', 'data'],
+		template: `
+		<div><span v-if="player['S3'].wisdom.lt('1e1000')">你有 </span><h2 v-bind:style="{'color': tmp[layer].color, 'text-shadow': '0px 0px 10px ' + tmp[layer].color}">{{formatWhole(player['S3'].wisdom)}}</h2> 智慧<span v-if="layers[layer].effectDescription"></span></span></div>
+		`
+	})
+
 	// Displays the main resource for the layer(not Whole)
 	Vue.component('main-normal-display', {
 		props: ['layer', 'data'],
@@ -643,6 +650,7 @@ function loadVue() {
 	Vue.component('particle', systemComponents['particle'])
 	Vue.component('bg', systemComponents['bg'])
 	Vue.component('song', systemComponents['song'])
+	Vue.component('ct', systemComponents['ct'])
 
 
 	app = new Vue({
