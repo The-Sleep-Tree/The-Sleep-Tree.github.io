@@ -205,7 +205,7 @@ var systemComponents = {
                 <td><button class="opt" onclick="toggleOpt('forceOneTab'); needsCanvasUpdate = true">页面布局<br>{{ options.forceOneTab?"单页面":"双页面" }}</button></td>
                 <td><button class="opt" onclick="player.error=true;throw(new Error('我崩溃了'));">😨</button></td>
             </tr>
-			<tr>
+			<tr v-if="hasUpgrade('e',33)">
 				<td><button class="opt" onclick="toggleOpt('songshown')">BGM显示<br>{{ formatOption('songshown') }}</button></td>
 			</tr>
             <div style="height: 1000px;"></div>

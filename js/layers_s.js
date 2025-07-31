@@ -300,7 +300,7 @@ addLayer("s2", {
 			    </span>
             `
             },
-            effect: function () {
+            effect() {
                 return _D1
                     .mul(hasUpgrade("s2", 21) ? upgradeEffect("s2", 21) : _D1)
                     .mul(hasUpgrade("s2", 22) ? upgradeEffect("s2", 22) : _D1)
@@ -330,7 +330,7 @@ addLayer("s2", {
 			    </span>
             `
             },
-            effect: function () {
+            effect() {
                 if (!hasUpgrade("s2", 21)) return 0
                 return player["S2"].log.log.add(_D1)
                     .pow(hasUpgrade("s2", 52) ? upgradeEffect("s2", 52) : _D1)
@@ -363,7 +363,7 @@ addLayer("s2", {
 			    </span>
             `
             },
-            effect: function () {
+            effect() {
                 if (!hasUpgrade("s2", 22)) return 0
                 return (player["S2"].antilog.log.abs()).pow(divNum(_D2)).add(_D(1.5))
                     .pow(hasUpgrade("s2", 52) ? upgradeEffect("s2", 52) : _D1)
@@ -396,7 +396,7 @@ addLayer("s2", {
 			    </span>
             `
             },
-            effect: function () {
+            effect() {
                 if (!hasUpgrade("s2", 31)) return 0
                 return _D(3.56)
             },
@@ -430,7 +430,7 @@ addLayer("s2", {
 			    </span>
             `
             },
-            effect: function () {
+            effect() {
                 if (!hasUpgrade("s2", 32)) return 0
                 return _D(0.84).mul(hasUpgrade("s2", 43) ? upgradeEffect("s2", 43) : _D1)
             },
@@ -464,7 +464,7 @@ addLayer("s2", {
 			    </span>
             `
             },
-            effect: function () {
+            effect() {
                 if (!hasUpgrade("s2", 33)) return 0
                 return _D(4 / 3)
             },
@@ -498,7 +498,7 @@ addLayer("s2", {
 			    </span>
             `
             },
-            effect: function () {
+            effect() {
                 if (!hasUpgrade("s2", 41)) return 0
                 return _D(-15)
             },
@@ -533,7 +533,7 @@ addLayer("s2", {
 			    </span>
             `
             },
-            effect: function () {
+            effect() {
                 if (!hasUpgrade("s2", 42)) return 0
                 return player["S2"].t42
             },
@@ -568,7 +568,7 @@ addLayer("s2", {
 			    </span>
             `
             },
-            effect: function () {
+            effect() {
                 if (!hasUpgrade("s2", 43)) return 0
                 return _D(1.111)
             },
@@ -603,7 +603,7 @@ addLayer("s2", {
 			    </span>
             `
             },
-            effect: function () {
+            effect() {
                 if (!hasUpgrade("s2", 44)) return 0
                 return _D(0.045)
             },
@@ -638,7 +638,7 @@ addLayer("s2", {
 			    </span>
             `
             },
-            effect: function () {
+            effect() {
                 if (!hasUpgrade("s2", 51)) return "/0.000"
                 if (hasUpgrade("s2", 52) && hasUpgrade("s2", 53)) return "解锁下一层"
                 return "你他妈还真点啊"
@@ -673,7 +673,7 @@ addLayer("s2", {
 			    </span>
             `
             },
-            effect: function () {
+            effect() {
                 if (!hasUpgrade("s2", 52)) return 0
                 return _D(1.145)
             },
@@ -707,7 +707,7 @@ addLayer("s2", {
 			    </span>
             `
             },
-            effect: function () {
+            effect() {
                 if (!hasUpgrade("s2", 53)) return 0
                 return _D(0.975)
             },
@@ -845,7 +845,7 @@ addLayer("s2", {
             unlocked() {
                 return hasUpgrade("s2", 63)
             },
-            tooltip: function () {
+            tooltip() {
                 return hasChallenge("s2", 11) ? "初始获得50对数" : "获得50对数,但错数开始快速膨胀"
             },
             canAfford() {
@@ -975,17 +975,17 @@ addLayer("s3", {
         }
     },
     getWisdom() {
-        return buyableEffect("s3", 12)[0]
+        return _D(buyableEffect("s3", 11)[0])
     },
     getTech() {
-        return _D100.pow(
-            _D(1)
-                .add(hasUpgrade("s3", 31) ? upgradeEffect("s3", 31) : _D0)
-        )
+        return _D100
             .mul(hasUpgrade("s3", 13) ? upgradeEffect("s3", 13) : _D1)
             .mul(hasUpgrade("s3", 14) ? upgradeEffect("s3", 14) : _D1)
             .mul(hasUpgrade("s3", 22) ? upgradeEffect("s3", 22) : _D1)
+            .mul(hasUpgrade("s3", 31) ? upgradeEffect("s3", 31) : _D1)
             .mul(hasUpgrade("s3", 32) ? upgradeEffect("s3", 32) : _D1)
+            .mul(hasMilestone(this.layer, 4) ? layers[this.layer].milestones[4].effect() : _D1)
+
     },
     update(diff) {
         if (!layers[this.layer].layerShown()) return;
@@ -995,13 +995,13 @@ addLayer("s3", {
         player[this.layer].points = player[this.layer].points.add(
             gridEffect(this.layer, 101).mul(diff)
         )
-        for (let i = 2; i <= 14; i++) {
+        for (let i = 2; i <= 15; i++) {
             let addtion = gridEffect(this.layer, i * 100 + 1).mul(diff)
             setGridData(this.layer, i * 100 - 99, getGridData(this.layer, i * 100 - 99).add(addtion))
         }
 
         if (!hasUpgrade('s3', 101)) return;
-        player["S3"].wisdom = player["S3"].wisdom.add(this.getWisdom().mul(diff))
+        player["S3"].wisdom = Decimal.min(player["S3"].wisdom.add(this.getWisdom().mul(diff)), buyableEffect("s3", 12))
     },
     infoboxes: {
         0: {
@@ -1014,15 +1014,25 @@ addLayer("s3", {
                 现在退出还来得及,但你不想放弃——N□□□□□<br>
                 ` },
         },
+        1: {
+            title: "前人的智慧",
+            body() {
+                return `
+                过往的记忆给了你力量<br>
+                你将这些深深刻入脑海<br>
+                人类的本能教会你一切<br>
+                成就的加成在此处有效`
+            }
+        }
     },
     tabFormat: {
         Hardware: {
             content: [
                 ["infobox", 0],
-                ["display-text", function () {
-                    return `<h3>[!]0.4版本将会移除萨玛定理第三世界个人电脑之后的层级数据</h3>`
-                }],
                 "main-display",
+                ["display-text", function () {
+                    return `(${formatWhole(gridEffect(this.layer, 101))}/秒)`
+                }],
                 "main-s3-tech-display",
                 ["display-text", function () {
                     return `(${formatWhole(layers[this.layer].getTech())}/秒)`
@@ -1033,17 +1043,30 @@ addLayer("s3", {
                 }],
                 "blank",
                 ["display-text", function () {
-                    return `购买比例 ${player["s3"].per ? player["s3"].per : 100}%`
+                    return `购买比例 ${player[this.layer].per ? player[this.layer].per : 100}%`
                 }],
                 ["slider", ["per", 1, 100]],
                 "blank",
-                "grid"
+                ["clickable", 11],
+                "blank",
+                "grid",
+                "blank",
+                ["display-text", function () {
+                    return `购买比例 ${player[this.layer].per ? player[this.layer].per : 100}%`
+                }],
+                ["slider", ["per", 1, 100]],
+                "blank",
+                ["clickable", 11],
+                "blank",
             ]
         },
         Technology: {
             content: [
                 ["infobox", 0],
                 "main-display",
+                ["display-text", function () {
+                    return `(${formatWhole(gridEffect(this.layer, 101))}/秒)`
+                }],
                 "main-s3-tech-display",
                 ["display-text", function () {
                     return `(${formatWhole(layers[this.layer].getTech())}/秒)`
@@ -1054,12 +1077,22 @@ addLayer("s3", {
         },
         Wisdom: {
             content: [
-                () => { return hasUpgrade('s3', 101) ? "main-s3-wisdom-display" : "" },
+                ["infobox", 1],
+                "main-s3-wisdom-display",
                 ["display-text", function () {
-                    return hasUpgrade('s3', 101) ? `(${format(layers[this.layer].getWisdom())}/秒)` : ""
+                    return `(${format(layers[this.layer].getWisdom())}/秒)`
+                }],
+                "blank",
+                ["display-text", function () {
+                    return `预计充满在 <h3 id="points">${layers['s3'].getFillTime(0)}</h3> (${layers['s3'].getFillTime(1)} 后)`
                 }],
                 "blank",
                 ['bar', 'WisdomBar'],
+                "blank",
+                ["display-text", function () {
+                    return `购买比例 ${player[this.layer].wper ? player[this.layer].wper : 100}%`
+                }],
+                ["slider", ["wper", 1, 100]],
                 "blank",
                 "buyables"
             ],
@@ -1072,33 +1105,57 @@ addLayer("s3", {
                 ["display-text", function () {
                     return `你的世界维度在 <h1 id="points">${player['S3'].world + 3}</h1> 维`
                 }],
+                "blank",
+                ["clickable", 21],
+                "blank",
+                ["clickable", 22],
+                "blank",
+                "milestones"
             ],
             unlocked() {
                 return player['S3'].world != 0 || hasUpgrade('s3', 101)
             }
         }
     },
+    getFillTime(id) {
+        const current = player['S3'].wisdom;
+        const max = buyableEffect("s3", 12);
+        const rate = layers[this.layer].getWisdom();
+
+        const remaining = Decimal.sub(max, current);
+        const secondsNeeded = Decimal.div(remaining, rate).toNumber();
+
+        if (Decimal.lte(remaining, 0)) return ["已满", "0 秒"][id];
+
+        const futureTimestamp = Date.now() + secondsNeeded * 1000;
+        const futureDate = new Date(futureTimestamp);
+
+        return [futureDate.toLocaleString('zh', { timeZone: 'Asia/Shanghai' }), formatTime(secondsNeeded)][id]
+    },
     bars: {
         WisdomBar: {
             direction: RIGHT,
-            width: 400,
-            height: 45,
-            progress() { return player["S3"].wisdom.div(buyableEffect("s3", 11)) },
+            width: 500,
+            height: 40,
+            progress() { return player["S3"].wisdom.div(buyableEffect("s3", 12)) },
             display() {
-                return `<h3>${formatWhole(player["S3"].wisdom)}/${formatWhole(buyableEffect("s3", 11))}</h3>`
+                return `<h3 id="points">${formatWhole(player["S3"].wisdom)}/${formatWhole(buyableEffect("s3", 12))}</h3>`
             }
         },
     },
     grid: {
-        rows() { return Math.min(player["S3"].world + 7, hasUpgrade("s3", 12) ? player["S3"].layer : Math.min(2, player["S3"].layer)) },
+        rows() { return Math.min(2 * player["S3"].world + 3, hasUpgrade("s3", 12) ? player["S3"].layer : Math.min(2, player["S3"].layer)) },
         cols: 3,
         maxRows: 15,
         getLayer(id) {
             return layer = ~~(id / 100);
         },
         canBuyCount(now, price, id) {
+            let effect = gridEffect(this.layer, id + 2)
+                .mul(hasMilestone(this.layer, 3) ? layers[this.layer].milestones[3].effect() : _D1)
+
             if (now.lt(price) || player["S3"].tech.lt(_D1)) return [_D0, _D0, _D0]
-            else if (now.mul(this.getPer()).lt(price)) return [_D1, price, gridEffect(this.layer, id + 2)]
+            else if (now.mul(this.getPer()).lt(price)) return [_D1, price, effect]
             else {
                 let count = Decimal.floor(
                     Decimal.min(
@@ -1106,7 +1163,9 @@ addLayer("s3", {
                         player["S3"].tech.mul(this.getPer())
                     )
                 )
-                return [count, count.mul(price), count.mul(gridEffect(this.layer, id + 2))]
+                return [count, count.mul(price), count
+                    .mul(effect)
+                ]
             }
         },
         calBuyPrice(id, layer) {
@@ -1115,6 +1174,7 @@ addLayer("s3", {
                     return (
                         _D10
                             .sub(hasUpgrade("s3", 21) ? upgradeEffect("s3", 21) : _D0)
+                            .sub(buyableEffect("s3", 22))
                     ).pow(layer)
             }
         },
@@ -1167,8 +1227,10 @@ addLayer("s3", {
                     player["S3"].layer = Math.max(player["S3"].layer, layer + 1)
 
                     setGridData(this.layer, id, data.add(buyCount[2]))
+
                     if (layer == 1) player[this.layer].points = player[this.layer].points.sub(buyCount[1])
                     else setGridData(this.layer, id - 100, targetData.sub(buyCount[1]))
+
                     player["S3"].tech = player["S3"].tech.sub(buyCount[0])
 
                     return
@@ -1235,11 +1297,12 @@ addLayer("s3", {
             let layer = this.getLayer(id);
             let base = new Decimal(layer);
 
+            base = base.add(buyableEffect("s3", 21))
+
+            base = base.pow(_D2)
+
             if (layer == 1 && hasUpgrade("s3", 11)) base = base.mul(upgradeEffect("s3", 11))
-
-            if (layer <= 4 && hasUpgrade("s3", 15)) base = base.pow(_D3)
-            else base = base.pow(_D2)
-
+            if (layer <= 4 && hasUpgrade("s3", 15)) base = base.mul(upgradeEffect("s3", 15))
             if (layer == 5 && hasUpgrade("s3", 23)) base = base.mul(upgradeEffect("s3", 23))
             if (layer == 7 && hasUpgrade("s3", 34)) base = base.mul(upgradeEffect("s3", 34))
 
@@ -1255,6 +1318,7 @@ addLayer("s3", {
                     return _D2.pow(data)
                 case 3:
                     if (hasUpgrade("s3", 24)) return _D3.pow(data.add(1))
+                        .mul(hasUpgrade("s3", 31) ? upgradeEffect("s3", 31) : _D1)
                     return _D2.pow(data)
             }
         },
@@ -1290,38 +1354,155 @@ addLayer("s3", {
             return true
         }
     },
+    clickables: {
+        11: {
+            title() {
+                return "最大化产量激增(Z)"
+            },
+            style() {
+                return {
+                    width: "150px",
+                    height: "40px",
+                    minHeight: "40px",
+                }
+            },
+            canClick() {
+                return true
+            },
+            unlocked() {
+                return true
+            },
+            onClick() {
+                for (let i = 102; i <= 1502; i += 100) {
+                    while (layers[this.layer].grid.getCanClick(getGridData(this.layer, i), i)) {
+                        layers[this.layer].grid.onClick(getGridData(this.layer, i), i)
+                    }
+                }
+            },
+        },
+        21: {
+            title() {
+                return `<h2
+                style="color:hsl(${(Date.now() / 15) % 360}, 100%, 80%);
+                text-shadow: 0 0 10px hsl(${(Date.now() / 15 + 180) % 360}, 100%, 50%);
+                ">转生</h2>`
+            },
+            display() {
+                let world = player["S3"].world * 2 + 3
+                return `
+                    需要
+                    <h2>${formatWhole(this.getTarget(world, 0))} / 1 ${this.getTarget(world, 1)}</h2>
+                    <h2>${formatWhole(player["S3"].wisdom)} / ${formatWhole(this.getRequireWisdom())} 智慧</h2>
+                `
+            },
+            style() {
+                return {
+                    width: "360px",
+                    height: "60px",
+                    color: "#d8d8d8",
+                    background: `linear-gradient(to right, 
+                    hsl(0, 0%, ${35 + Math.sin(Date.now() / 1000) * 15}%), 
+                    hsl(0, 0%, ${35 + Math.cos(Date.now() / 1000) * 15}%))`,
+                    border: "4px solid",
+                    borderRadius: "4px",
+                    borderColor: "rgba(0, 0, 0, 0.125)"
+                }
+            },
+            canClick() {
+                let world = player["S3"].world * 2 + 3
+                return this.getTarget(world, 0).gte(1) && player["S3"].wisdom.gte(this.getRequireWisdom())
+            },
+            unlocked() {
+                return true
+            },
+            onClick() {
+                doReset(this.layer, true)
+            },
+            getTarget(layer, id) {
+                let name = layers[this.layer].grid.layerName(layer);
+                let count = getGridData(this.layer, layer * 100 + 1)
+
+                return [
+                    count, name
+                ][id]
+            },
+            getRequireWisdom() {
+                return [
+                    30,
+                    100,
+                    200,
+                    25960
+                ][player["S3"].world]
+            }
+        },
+        22: {
+            title() {
+                return `<h2
+                style="color:hsl(${(Date.now() / 15) % 360}, 100%, 50%);
+                text-shadow: 0 0 10px hsl(${(Date.now() / 15 + 180) % 360}, 100%, 30%);
+                ">卡关了?</h2>`
+            },
+            style() {
+                return {
+                    width: "360px",
+                    height: "60px",
+                    background: `linear-gradient(in hsl longer hue to right, 
+                    hsl(${(-Date.now() / 35) % 360}, 50%, 30%), 
+                    hsl(${(-Date.now() / 35 + 1) % 360}, 50%, 30%)`,
+                    border: "4px solid",
+                    borderRadius: "4px",
+                    borderColor: "rgba(0, 0, 0, 0.125)"
+                }
+            },
+            canClick() {
+                return true
+            },
+            unlocked() {
+                return getBuyableAmount(this.layer, 23).gte(512)
+            },
+            onClick() {
+                doReset(this.layer, true)
+            },
+        },
+    },
     buyables: {
         11: {
-            title: function () {
-                return `大脑<br>Lv ${getBuyableAmount("s3", 11)}`
+            title() {
+                return `意识<br>Lv ${formatWhole(getBuyableAmount("s3", 11))} / ${formatWhole(this.purchaseLimit())}`
             },
             display() {
                 return `
-                    <h3>思维的容器</h3><br><h3>思维上限被设为 <h2>${format(buyableEffect("s3", 11))}</h2> 点</h3><br><br><h3>开销: 5智慧</h3>
+                    <h3>思考的前提</h3><br><h3>每秒获得 <h2>${format(buyableEffect("s3", 11)[0])}</h2> 智慧</h3><br><h3>并提升智慧容量至 <h2>${format(buyableEffect("s3", 11)[1])}</h2> 倍</h3><br><br><h3>开销: ${formatWhole(this.cost())} 智慧</h3>
                 `
             },
             cost() {
-                return _D(5)
+                let x = getBuyableAmount("s3", 11)
+                return _D([
+                    50,
+                    135,
+                    300,
+                    700,
+                    1750,
+                    4700,
+                    13650,
+                    43200
+                ][x]).div(buyableEffect("s3", 23))
             },
             effect(x) {
-                return getYFromOrderedPoints(
-                    [
-                        [0, 1000],
-                        [10, 1500],
-                        [50, 2000],
-                        [100, 2500],
-                        [300, 3000],
-                        [900, 3500],
-                        [2500, 4000],
-                        [5000, 4500],
-                        [10000, 5000],
-                        [20000, 5500],
-                        [40000, 6000],
-                        [80000, 6500],
-                        [100000, 6666]
-                    ]
-                    , x
-                ).mul(buyableEffect("s3", 12)[1])
+                return [_D([
+                    0.05,
+                    0.1,
+                    0.2,
+                    0.3,
+                    0.45,
+                    0.6,
+                    0.75,
+                    1
+                ][x])
+                    .mul(player.achievementsSpeed)
+                    .mul(_D1.add(buyableEffect("s3", 13).div(100)))
+                    .mul(hasMilestone(this.layer, 2) ? layers[this.layer].milestones[2].effect() : _D1)
+                    , _D3.pow(x.div(6))]
             },
             canAfford() { return player['S3'].wisdom.gte(this.cost()) },
             buy() {
@@ -1330,53 +1511,314 @@ addLayer("s3", {
                 player['S3'].wisdom = (player['S3'].wisdom).sub(this.cost())
                 addBuyables("s3", 11, _D1)
             },
-            purchaseLimit: function () {
-                return pow10(5)
+            purchaseLimit() {
+                return _D7
             }
         },
         12: {
-            title: function () {
-                return `意识<br>Lv ${getBuyableAmount("s3", 12)}`
+            title() {
+                return `大脑<br>Lv ${formatWhole(getBuyableAmount("s3", 12))} / ${formatWhole(this.purchaseLimit())}`
             },
             display() {
                 return `
-                    <h3>思考的前提是意识</h3><br><h3>每秒获得 <h2>${format(buyableEffect("s3", 12)[0])}</h2> 智慧</h3><br><h3>并提升智慧容量至 <h2>${format(buyableEffect("s3", 12)[1])}</h2> 倍</h3><br><br><h3>开销: ${this.cost()}智慧</h3>
+                    <h3>思维的容器</h3><br><h3>智慧上限被设为 <h2>${format(buyableEffect("s3", 12))}</h2> 点</h3><br><br><h3>开销: ${formatWhole(this.cost())} 智慧</h3><br><h3>点击以 ${formatWhole(this.buyCount().mul(this.cost()))} 智慧生长 ${formatWhole(this.buyCount())} 个</h3>
                 `
             },
             cost() {
-                let x = getBuyableAmount("s3", 12)
-                return _D([
-                    80,
-                    150,
-                    300,
-                    600,
-                    1350,
-                    3000,
-                    6400,
-                    12990
-                ][x])
+                return _D(5)
             },
             effect(x) {
-                return [_D([
-                    0.2,
-                    0.4,
-                    0.8,
-                    1.5,
-                    3,
-                    5,
-                    8,
-                    10
-                ][x]),_D(1.1).pow(x)]
+                return getYFromOrderedPoints(
+                    [
+                        [0, 5],
+                        [10, 100],
+                        [100, 400],
+                        [1000, 1200],
+                        [10000, 3000],
+                        [100000, 6000]
+                    ]
+                    , x
+                ).mul(buyableEffect("s3", 11)[1])
             },
             canAfford() { return player['S3'].wisdom.gte(this.cost()) },
             buy() {
                 if (!this.canAfford()) return;
                 if (getBuyableAmount("s3", 12).gte(this.purchaseLimit())) return;
-                player['S3'].wisdom = (player['S3'].wisdom).sub(this.cost())
-                addBuyables("s3", 12, _D1)
+
+                let buyCount = this.buyCount()
+
+                player['S3'].wisdom = (player['S3'].wisdom).sub(this.buyCount().mul(this.cost()))
+                addBuyables("s3", 12, buyCount)
             },
-            purchaseLimit: function () {
-                return _D7
+            buyCount() {
+                if (!this.canAfford()) return _D0;
+                let limit = this.purchaseLimit().sub(getBuyableAmount("s3", 12));
+                let canBuyMax = player['S3'].wisdom.div(this.cost());
+
+                if (limit.eq(0)) return _D0
+                if (canBuyMax.mul(this.getwPer()).lte(1)) return _D1
+                else {
+                    return Decimal.floor(Decimal.min(
+                        limit, canBuyMax.mul(this.getwPer())
+                    ))
+                }
+            },
+            purchaseLimit() {
+                return pow10(5)
+            },
+            getwPer() {
+                let p = player[this.layer].wper
+                return (p ? p : 100) / 100
+            }
+        },
+        13: {
+            title() {
+                return `脊髓<br>Lv ${formatWhole(getBuyableAmount("s3", 13))} / ${formatWhole(this.purchaseLimit())}`
+            },
+            display() {
+                return `
+                    <h3>本能的载体</h3><br><h3>智慧获取增加 <h2>${format(buyableEffect("s3", 13))}</h2> %</h3><br><br><h3>开销: ${formatWhole(this.cost())} 智慧</h3><br><h3>点击以 ${formatWhole(this.buyCount().mul(this.cost()))} 智慧生长 ${formatWhole(this.buyCount())} 个</h3>
+                `
+            },
+            cost() {
+                return _D(5)
+            },
+            effect(x) {
+                return getYFromOrderedPoints(
+                    [
+                        [0, 0],
+                        [20, 25],
+                        [40, 45],
+                        [80, 70],
+                        [160, 100],
+                        [320, 135],
+                        [640, 175],
+                        [1280, 220],
+                        [2560, 270],
+                        [5120, 325],
+                        [10240, 385],
+                        [20480, 450],
+                        [40960, 520],
+                        [100000, 600]
+                    ]
+                    , x
+                )
+            },
+            canAfford() { return player['S3'].wisdom.gte(this.cost()) },
+            buy() {
+                if (!this.canAfford()) return;
+                if (getBuyableAmount("s3", 13).gte(this.purchaseLimit())) return;
+
+                let buyCount = this.buyCount()
+
+                player['S3'].wisdom = (player['S3'].wisdom).sub(this.buyCount().mul(this.cost()))
+                addBuyables("s3", 13, buyCount)
+            },
+            buyCount() {
+                if (!this.canAfford()) return _D0;
+                let limit = this.purchaseLimit().sub(getBuyableAmount("s3", 13));
+                let canBuyMax = player['S3'].wisdom.div(this.cost());
+
+                if (limit.eq(0)) return _D0
+                if (canBuyMax.mul(this.getwPer()).lte(1)) return _D1
+                else {
+                    return Decimal.floor(Decimal.min(
+                        limit, canBuyMax.mul(this.getwPer())
+                    ))
+                }
+            },
+            purchaseLimit() {
+                return pow10(5)
+            },
+            getwPer() {
+                let p = player[this.layer].wper
+                return (p ? p : 100) / 100
+            }
+        },
+        21: {
+            title() {
+                return `欲望<br>Lv ${formatWhole(getBuyableAmount("s3", 21))} / ${formatWhole(this.purchaseLimit())}`
+            },
+            display() {
+                return `
+                    <h3>行为的动机</h3><br><h3>基础产量增加 <h2>${format(buyableEffect("s3", 21))}</h2></h3><br><br><h3>开销: ${formatWhole(this.cost())} 智慧</h3><br><h3>点击以 ${formatWhole(this.buyCount().mul(this.cost()))} 智慧产生 ${formatWhole(this.buyCount())} 个</h3>
+                `
+            },
+            cost() {
+                return _D(10)
+            },
+            effect(x) {
+                return getYFromOrderedPoints(
+                    [
+                        [0, 0],
+                        [10, 0.5],
+                        [20, 1.2],
+                        [40, 2.6],
+                        [80, 5.2],
+                        [160, 9.3],
+                        [320, 15],
+                        [640, 21],
+                        [1280, 27],
+                        [2560, 32],
+                        [5120, 36],
+                        [10000, 40],
+                    ]
+                    , x
+                )
+            },
+            canAfford() { return player['S3'].wisdom.gte(this.cost()) },
+            buy() {
+                if (!this.canAfford()) return;
+                if (getBuyableAmount("s3", 21).gte(this.purchaseLimit())) return;
+
+                let buyCount = this.buyCount()
+
+                player['S3'].wisdom = (player['S3'].wisdom).sub(this.buyCount().mul(this.cost()))
+                addBuyables("s3", 21, buyCount)
+            },
+            buyCount() {
+                if (!this.canAfford()) return _D0;
+                let limit = this.purchaseLimit().sub(getBuyableAmount("s3", 21));
+                let canBuyMax = player['S3'].wisdom.div(this.cost());
+
+                if (limit.eq(0)) return _D0
+                if (canBuyMax.mul(this.getwPer()).lte(1)) return _D1
+                else {
+                    return Decimal.floor(Decimal.min(
+                        limit, canBuyMax.mul(this.getwPer())
+                    ))
+                }
+            },
+            purchaseLimit() {
+                return pow10(4)
+            },
+            getwPer() {
+                let p = player[this.layer].wper
+                return (p ? p : 100) / 100
+            }
+        },
+        22: {
+            title() {
+                return `道德<br>Lv ${formatWhole(getBuyableAmount("s3", 22))} / ${formatWhole(this.purchaseLimit())}`
+            },
+            display() {
+                return `
+                    <h3>行为的约束</h3><br><h3>生产成本底数减少 <h2>${format(buyableEffect("s3", 22))}</h2></h3><br><br><h3>开销: ${formatWhole(this.cost())} 智慧</h3><br><h3>点击以 ${formatWhole(this.buyCount().mul(this.cost()))} 智慧产生 ${formatWhole(this.buyCount())} 个</h3>
+                `
+            },
+            cost() {
+                return _D(10)
+            },
+            effect(x) {
+                return getYFromOrderedPoints(
+                    [
+                        [0, 0],
+                        [10, 0.05],
+                        [20, 0.09],
+                        [40, 0.13],
+                        [80, 0.18],
+                        [160, 0.24],
+                        [320, 0.32],
+                        [640, 0.42],
+                        [1280, 0.54],
+                        [2560, 0.68],
+                        [5120, 0.84],
+                        [10000, 1],
+                    ]
+                    , x
+                )
+            },
+            canAfford() { return player['S3'].wisdom.gte(this.cost()) },
+            buy() {
+                if (!this.canAfford()) return;
+                if (getBuyableAmount("s3", 22).gte(this.purchaseLimit())) return;
+
+                let buyCount = this.buyCount()
+
+                player['S3'].wisdom = (player['S3'].wisdom).sub(this.buyCount().mul(this.cost()))
+                addBuyables("s3", 22, buyCount)
+            },
+            buyCount() {
+                if (!this.canAfford()) return _D0;
+                let limit = this.purchaseLimit().sub(getBuyableAmount("s3", 22));
+                let canBuyMax = player['S3'].wisdom.div(this.cost());
+
+                if (limit.eq(0)) return _D0
+                if (canBuyMax.mul(this.getwPer()).lte(1)) return _D1
+                else {
+                    return Decimal.floor(Decimal.min(
+                        limit, canBuyMax.mul(this.getwPer())
+                    ))
+                }
+            },
+            purchaseLimit() {
+                return pow10(4)
+            },
+            getwPer() {
+                let p = player[this.layer].wper
+                return (p ? p : 100) / 100
+            }
+        },
+        23: {
+            title() {
+                return `谋略<br>Lv ${formatWhole(getBuyableAmount("s3", 23))} / ${formatWhole(this.purchaseLimit())}`
+            },
+            display() {
+                return `
+                    <h3>行为的组合</h3><br><h3>意识价格除以 <h2>${format(buyableEffect("s3", 23))}</h2></h3><br><br><h3>开销: ${formatWhole(this.cost())} 智慧</h3><br><h3>点击以 ${formatWhole(this.buyCount().mul(this.cost()))} 智慧产生 ${formatWhole(this.buyCount())} 个</h3>
+                `
+            },
+            cost() {
+                return _D(100)
+            },
+            effect(x) {
+                return getYFromOrderedPoints(
+                    [
+                        [0, 1],
+                        [1, 1.001],
+                        [2, 1.002],
+                        [4, 1.005],
+                        [8, 1.01],
+                        [16, 1.02],
+                        [32, 1.04],
+                        [64, 1.08],
+                        [128, 1.16],
+                        [256, 1.32],
+                        [512, 2],
+                        [1000, 1],
+                    ]
+                    , x
+                )
+            },
+            canAfford() { return player['S3'].wisdom.gte(this.cost()) },
+            buy() {
+                if (!this.canAfford()) return;
+                if (getBuyableAmount("s3", 23).gte(this.purchaseLimit())) return;
+
+                let buyCount = this.buyCount()
+
+                player['S3'].wisdom = (player['S3'].wisdom).sub(this.buyCount().mul(this.cost()))
+                addBuyables("s3", 23, buyCount)
+            },
+            buyCount() {
+                if (!this.canAfford()) return _D0;
+                let limit = this.purchaseLimit().sub(getBuyableAmount("s3", 23));
+                let canBuyMax = player['S3'].wisdom.div(this.cost());
+
+                if (limit.eq(0)) return _D0
+                if (canBuyMax.mul(this.getwPer()).lte(1)) return _D1
+                else {
+                    return Decimal.floor(Decimal.min(
+                        limit, canBuyMax.mul(this.getwPer())
+                    ))
+                }
+            },
+            purchaseLimit() {
+                return pow10(3)
+            },
+            getwPer() {
+                let p = player[this.layer].wper
+                return (p ? p : 100) / 100
             }
         },
     },
@@ -1386,18 +1828,16 @@ addLayer("s3", {
             description: "解锁大脑",
             tooltip: "",
             cost() {
-                return [
-                    pow10(15)
-                ][player['S3'].world]
+                return player['S3'].world == 0 ? pow10(11) : 0
             },
         },
         11: {
             title: "[11]晶体管",
-            description: "真空管升级为晶体管,基础产量×3",
-            effect: function () {
+            description: "真空管升级为晶体管,产量×3",
+            effect() {
                 return _D3
             },
-            effectDisplay: function () {
+            effectDisplay() {
                 return `×${format(upgradeEffect("s3", 11))}`
             },
             tooltip: "",
@@ -1415,10 +1855,10 @@ addLayer("s3", {
         13: {
             title: "[13]研究员",
             description: "科技获取×1.5",
-            effect: function () {
+            effect() {
                 return _D(1.5)
             },
-            effectDisplay: function () {
+            effectDisplay() {
                 return `×${format(upgradeEffect("s3", 13))}`
             },
             tooltip: "",
@@ -1430,10 +1870,10 @@ addLayer("s3", {
         14: {
             title: "[14]科技涌现",
             description: "最高解锁硬件层级加成科技获取×1.2/层",
-            effect: function () {
+            effect() {
                 return _D(1.2).pow(player["S3"].layer)
             },
-            effectDisplay: function () {
+            effectDisplay() {
                 return `×${format(upgradeEffect("s3", 14))}`
             },
             tooltip: "",
@@ -1444,30 +1884,30 @@ addLayer("s3", {
         },
         15: {
             title: "[15]高速缓存",
-            description: "前四个层级的基础产量指数+1",
-            effect: function () {
-                return _D1
+            description: "前四个层级的产量×2",
+            effect() {
+                return _D2
             },
-            effectDisplay: function () {
-                return `+^${format(upgradeEffect("s3", 15))}`
+            effectDisplay() {
+                return `×${format(upgradeEffect("s3", 15))}`
             },
             tooltip: "",
-            cost: pow10(14),
+            cost: pow10(13),
             unlocked() {
-                return hasUpgrade(this.layer, 14)
+                return hasUpgrade(this.layer, 14) && player["S3"].world >= 1
             }
         },
         21: {
             title: "[21]成本控制",
             description: "每层生产成本底数-1",
-            effect: function () {
+            effect() {
                 return _D1
             },
-            effectDisplay: function () {
+            effectDisplay() {
                 return `-${format(upgradeEffect("s3", 21))}`
             },
             tooltip: "",
-            cost: pow10(17),
+            cost: pow10(15),
             unlocked() {
                 return hasUpgrade(this.layer, 15)
             }
@@ -1475,14 +1915,14 @@ addLayer("s3", {
         22: {
             title: "[22]研究组",
             description: "科技加成自身获取",
-            effect: function () {
+            effect() {
                 return player["S3"].tech.add(1).log(5)
             },
-            effectDisplay: function () {
+            effectDisplay() {
                 return `×${format(upgradeEffect("s3", 22))}`
             },
             tooltip: "",
-            cost: pow10(21),
+            cost: pow10(18),
             unlocked() {
                 return hasUpgrade(this.layer, 21)
             }
@@ -1490,18 +1930,18 @@ addLayer("s3", {
         23: {
             title: "[23]摩尔定律",
             description: `游戏时间加成CPU产量`,
-            effect: function () {
-                let x = _D2.pow(Decimal.div(player.gameTime, 18 * 30 * 24 * 60 * 60))
+            effect() {
+                let x = _D2.pow(Decimal.div(player.gameTime, 10 * 12 * 30 * 24 * 60 * 60))
                 x = x.gte(1000) ? Decimal.add(1000, x.sub(1000).log(1.3)) : x;
                 return x
             },
-            effectDisplay: function () {
+            effectDisplay() {
                 return `×${format(upgradeEffect("s3", 23))}${upgradeEffect("s3", 23).gte(_D(1000)) ? "<br>软上限在×1000" : ""}`
             },
             tooltip: "",
-            cost: pow10(24),
+            cost: pow10(21),
             unlocked() {
-                return hasUpgrade(this.layer, 22)
+                return hasUpgrade(this.layer, 22) && player["S3"].world >= 2
             }
         },
         24: {
@@ -1516,18 +1956,18 @@ addLayer("s3", {
         25: {
             title: "[25]无痛激增",
             description: "产量激增不再扣除硬件,且效果更强",
-            cost: pow10(36),
+            cost: pow10(37),
             unlocked() {
                 return hasUpgrade(this.layer, 24)
             }
         },
         31: {
             title: "[31]工业革命 III",
-            description: "科技基础获取指数+0.25",
-            effect: function () {
-                return _D(0.25)
+            description: "科技获取×2<br>生产×2",
+            effect() {
+                return _D2
             },
-            effectDisplay: function () {
+            effectDisplay() {
                 return `×${format(upgradeEffect("s3", 31))}`
             },
             cost: pow10(42),
@@ -1538,24 +1978,24 @@ addLayer("s3", {
         32: {
             title: "[32]实验室",
             description: "电子加成科技获取",
-            effect: function () {
+            effect() {
                 return Decimal.max(_D1, player[this.layer].points.add(_D1).div(_D(1e35)).log(8))
             },
-            effectDisplay: function () {
+            effectDisplay() {
                 return `×${format(upgradeEffect("s3", 32))}`
             },
             cost: pow10(46),
             unlocked() {
-                return hasUpgrade(this.layer, 31)
+                return hasUpgrade(this.layer, 31) && player["S3"].world >= 3
             }
         },
         33: {
             title: "[33]科学之星",
             description: "时间流速×2",
-            effect: function () {
+            effect() {
                 return _D(2)
             },
-            effectDisplay: function () {
+            effectDisplay() {
                 return `×${format(upgradeEffect("s3", 33))}`
             },
             cost: pow10(50),
@@ -1566,10 +2006,10 @@ addLayer("s3", {
         34: {
             title: "[34]局域网",
             description: "个人电脑数量加成自身产量",
-            effect: function () {
+            effect() {
                 return getGridData(this.layer, 701).pow(0.1)
             },
-            effectDisplay: function () {
+            effectDisplay() {
                 return `×${format(upgradeEffect("s3", 34))}`
             },
             tooltip: "",
@@ -1579,10 +2019,66 @@ addLayer("s3", {
             }
         },
     },
-    doReset(resettingLayer) {
-        return
+    milestones: {
+        1: {
+            requirementDescription: "3维",
+            effectDescription: '这里只是一个普通的空间,毫无特殊之处,此外这里绝对和现实世界不一样<br>你发现你的科技在这里发展的很缓慢,这让你陷入了极长的等待<br>你开始感到很烦,直到你找到了前人留下的痕迹...',
+            done() { return player["S3"].world >= 0 }
+        },
+        2: {
+            requirementDescription: "4维",
+            effectDescription() {
+                return `是的!这可行!在克服了最初的不适感之后,你惊讶的发现你能看清更多了<br>之前的迷雾逐渐被揭开,化作过往云烟,但你现在需要面对新的挑战,你不会仅满足于此<br>最高解锁层级加成智慧获取×${format(this.effect())}`
+            },
+            effect() {
+                return _D(1 + player["S3"].layer / 10)
+            },
+            done() { return player["S3"].world >= 1 }
+        },
+        3: {
+            requirementDescription: "5维",
+            effectDescription() {
+                return `上一个世界的计算已经向你揭示了这里的美好,但你没想到它居然比你想象的更好<br>更高的维度代表你能让元件有更多的排列方式,这让你的工作变得轻而易举<br>最高解锁层级加成生产×${format(this.effect())}`
+            },
+            effect() {
+                return _D(1 + player["S3"].layer * 2)
+            },
+            done() { return player["S3"].world >= 2 }
+        },
+        4: {
+            requirementDescription: "6维",
+            effectDescription() {
+                return `你已经到了六维,现在对你来说几乎没有什么难事,但你这时发现宇宙的能源开始短缺<br>可能是因为宇宙的"体积"变得如此之大,以至于物质的"密度"变得非常低,但这不是问题<br>最高解锁层级加成科技获取×${format(this.effect())}`
+            },
+            effect() {
+                return _D(1 + player["S3"].layer / 2)
+            },
+            done() { return player["S3"].world >= 2 }
+        },
+        //.mul(hasMilestone(this.layer, 0) ? layers[this.layer].milestones[0].effect() : _D1)
     },
-    layerShown() { return hasMilestone("m", 6) && hasChallenge("s2", 11) },
+    doReset(resettingLayer) {
+        if (resettingLayer = "s3") {
+            let truereset = layers[this.layer].clickables[21].canClick();
+
+            layerDataReset(this.layer, ["milestones"])
+
+            player["S3"].tech = _D0
+            player["S3"].wisdom = _D0
+            player["S3"].layer = 1
+
+            if (truereset) player["S3"].world++
+        }
+    },
+    layerShown() { return hasChallenge("s2", 11) },
     hotkeys: [
+        {
+            key: "z",
+            description: "z: 最大化产量激增",
+            onPress() {
+                layers[this.layer].clickables[11].onClick()
+            },
+            unlocked() { return layers[this.layer].layerShown() }
+        }
     ],
 });

@@ -1,5 +1,5 @@
 // ************ Themes ************
-var themes = ["default", "aqua", "fox","light","psycho"]
+var themes = ["default", "aqua", "fox","light","blind"]
 
 var colors = {
 	default: {
@@ -54,19 +54,19 @@ var colors = {
 		highlight: "#f0f0f0",
 		background_tooltip: "rgba(200, 200, 200, 0.75)",
 	},
-	psycho: {
-		1: "#000000",
-		2: "#222222",
-		3: "#555555",
-		color: "#ff419d",
-		points: "#80fee5",
-		superPoints: "#4eb8a3",
-		bought: "#a24deb",
-		locked: "#def725",
-		background: "#b191d3",
-		background2: "#b269ff",
-		highlight: "#7f1359",
-		background_tooltip: "rgba(87, 76, 235, 0.75)",
+	blind: {
+		1: "#D8D8D8",
+		2: "#D8D8D8",
+		3: "#D8D8D8",
+		color: "#D4D4D4",
+		points: "#DFDFDF",
+		superPoints: "#F2F2F2",
+		bought: "#EEEEEE",
+		locked: "#CCCCCC",
+		background: "#D8D8D8",
+		background2: "#D4D4D4",
+		highlight: "#F8F8F8",
+		background_tooltip: "rgba(128, 128, 128, 0.75)",
 	},
 }
 function changeTheme() {
@@ -92,8 +92,8 @@ function getThemeName() {
 		'aqua': '水色',
 		'fox': '狐狸',
 		'light': '亮色',
-		'psycho': '迷乱'
-	}[options.theme ?? 'default']
+		'blind': '瞎子'
+	}[options.theme ?? '默认']
 }
 
 function switchTheme() {

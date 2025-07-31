@@ -155,7 +155,7 @@ addLayer("p", {
     },
     buyables: {
         11: {
-            title: function () {
+            title(){
                 return `能量收集器<br>MK${getBuyableAmount("p", 11)}`
             },
             display() {
@@ -197,7 +197,7 @@ addLayer("p", {
                 player[this.layer].points = (player[this.layer].points).sub(this.cost())
                 addBuyables("p", 11, _D1)
             },
-            purchaseLimit: function () {
+            purchaseLimit(){
                 if (hasUpgrade("p", 44)) {
                     return Decimal.dInf
                 } else if (hasUpgrade("p", 33)) {
@@ -212,7 +212,7 @@ addLayer("p", {
             }
         },
         12: {
-            title: function () {
+            title(){
                 return `能量收集器收集器<br>LK${getBuyableAmount("p", 12)}`
             },
             display() {
@@ -251,7 +251,7 @@ addLayer("p", {
             }
         },
         13: {
-            title: function () {
+            title(){
                 return `时间加速器<br>TK${getBuyableAmount("p", 13)}`
             },
             display() {
@@ -317,13 +317,13 @@ addLayer("p", {
             }
         },
         12: {
-            title: function () {
+            title(){
                 return `<h2
                 style="color:hsl(${(Date.now() / 15) % 360}, 100%, 30%);
                 text-shadow: 0 0 10px hsl(${(Date.now() / 15 + 180) % 360}, 100%, 70%);
                 ">硬重置等价交换小游戏</h2>`
             },
-            style: function () {
+            style(){
                 return {
                     width: "360px",
                     height: "60px",
@@ -351,10 +351,10 @@ addLayer("p", {
             title: "强效收集器",
             description: "EMC获取×50",
             tooltip: "现在它比MK2强了一倍!",
-            effect: function () {
+            effect(){
                 return _D(50)
             },
-            effectDisplay: function () {
+            effectDisplay(){
                 return `×${format(upgradeEffect("p", 11))}`
             },
             cost: _D10
@@ -363,10 +363,10 @@ addLayer("p", {
             title: "买一些,再买一些",
             description: "MK购买数量加成自身产量",
             tooltip: "买的越多,赚的越多!",
-            effect: function () {
+            effect(){
                 return getBuyableAmount("p", 11).pow(_D2)
             },
-            effectDisplay: function () {
+            effectDisplay(){
                 return `×${format(upgradeEffect("p", 12))}`
             },
             cost: pow10(3),
@@ -387,10 +387,10 @@ addLayer("p", {
             title: "获得进度",
             description: "获得一个等价交换进度<br>并将MK生产指数+0.2",
             tooltip: "我们势不可挡!",
-            effect: function () {
+            effect(){
                 return _D(0.2)
             },
-            effectDisplay: function () {
+            effectDisplay(){
                 return `+^${format(upgradeEffect("p", 14))}`
             },
             cost: _D(1.25e6),
@@ -402,10 +402,10 @@ addLayer("p", {
             title: "加速火把 I",
             description: "时间流速×5",
             tooltip: "时间逐渐开始加速?",
-            effect: function () {
+            effect(){
                 return _D5
             },
-            effectDisplay: function () {
+            effectDisplay(){
                 return `×${format(upgradeEffect("p", 15))}`
             },
             cost: _D(8e7),
@@ -417,11 +417,11 @@ addLayer("p", {
             title: "割圆术",
             description: "EMC获取×π",
             tooltip: "我的世界里不存在圆",
-            effect: function () {
+            effect(){
                 return _D(Math.PI)
                     .pow(hasUpgrade("p", 45) ? upgradeEffect("p", 45) : _D1)
             },
-            effectDisplay: function () {
+            effectDisplay(){
                 return `×${format(upgradeEffect("p", 16))}`
             },
             cost: _D(314159265),
@@ -442,10 +442,10 @@ addLayer("p", {
             title: "EMC收集收集器",
             description: "EMC加成MK获取",
             tooltip: "很好,熟悉的感觉又回来了",
-            effect: function () {
+            effect(){
                 return (player[this.layer].points.add(_D1)).log10().add(_D1)
             },
-            effectDisplay: function () {
+            effectDisplay(){
                 return `×${format(upgradeEffect("p", 22))}`
             },
             cost: pow10(13),
@@ -466,10 +466,10 @@ addLayer("p", {
             title: "获得进度 II",
             description: "获得一个等价交换进度<br>并将MK生产指数+0.2",
             tooltip: "我们势不可挡...吗?",
-            effect: function () {
+            effect(){
                 return _D(0.2)
             },
-            effectDisplay: function () {
+            effectDisplay(){
                 return `+^${format(upgradeEffect("p", 24))}`
             },
             cost: pow10(22),
@@ -481,10 +481,10 @@ addLayer("p", {
             title: "我们需要买更多",
             description: "LK购买数量加成所有收集器产量",
             tooltip: "如果买更多,还会赚更多吗?",
-            effect: function () {
+            effect(){
                 return getBuyableAmount("p", 12).pow(_D(0.5))
             },
-            effectDisplay: function () {
+            effectDisplay(){
                 return `×${format(upgradeEffect("p", 25))}`
             },
             cost: pow10(28),
@@ -496,10 +496,10 @@ addLayer("p", {
             title: "Rush E",
             description: "EMC获取×e",
             tooltip: "准备好指数爆炸了吗?",
-            effect: function () {
+            effect(){
                 return _D(Math.E)
             },
-            effectDisplay: function () {
+            effectDisplay(){
                 return `×${format(upgradeEffect("p", 26))}`
             },
             cost: pow10(35),
@@ -520,10 +520,10 @@ addLayer("p", {
             title: "强效收集器收集器",
             description: "MK获取×50",
             tooltip: "现在它比LK不知道多少强了一倍!",
-            effect: function () {
+            effect(){
                 return _D(50)
             },
-            effectDisplay: function () {
+            effectDisplay(){
                 return `×${format(upgradeEffect("p", 32))}`
             },
             cost: pow10(52),
@@ -544,7 +544,7 @@ addLayer("p", {
             title: "获得进度 III",
             description: "获得一个等价交换进度<br>并将MK生产指数依据EMC提升",
             tooltip: "我们真的势不可挡!",
-            effect: function () {
+            effect(){
                 return _D(0.6).div(
                     _D1.add(
                         _D2.pow(
@@ -553,7 +553,7 @@ addLayer("p", {
                     )
                 );
             },
-            effectDisplay: function () {
+            effectDisplay(){
                 return `+^${format(upgradeEffect("p", 34))}`
             },
             cost: pow10(75),
@@ -565,10 +565,10 @@ addLayer("p", {
             title: "加速火把 II",
             description: "时间加速器产量加成时间流速",
             tooltip: "时间已经加速起来了!",
-            effect: function () {
+            effect(){
                 return buyableEffect("p", 13)
             },
-            effectDisplay: function () {
+            effectDisplay(){
                 return `×${format(upgradeEffect("p", 35))}`
             },
             cost: pow10(100),
@@ -580,7 +580,7 @@ addLayer("p", {
             title: "结束了?",
             description: "解锁无限燃料",
             tooltip: "如结",
-            effect: function () {
+            effect(){
                 return player[this.layer].points.div(_D10)
             },
             cost: _DInf,
@@ -593,11 +593,11 @@ addLayer("p", {
             title: "T = 101%",
             description: "无限燃料加成时间流速",
             tooltip: "第一日,赐以时间",
-            effect: function () {
+            effect(){
                 return (_D2.add(player.P.Inf)).log2().pow(_D2)
                     .pow(hasUpgrade("p", 46) ? upgradeEffect("p", 46) : _D1)
             },
-            effectDisplay: function () {
+            effectDisplay(){
                 return `×${format(upgradeEffect("p", 41))}`
             },
             cost: _D1,
@@ -612,11 +612,11 @@ addLayer("p", {
             title: "η = 101%",
             description: "无限燃料减少机器价格",
             tooltip: "第二日,赐以价格",
-            effect: function () {
+            effect(){
                 return (_D2.add(player.P.Inf)).log2().pow(_D10)
                     .pow(hasUpgrade("p", 46) ? upgradeEffect("p", 46) : _D1)
             },
-            effectDisplay: function () {
+            effectDisplay(){
                 return `×${format(upgradeEffect("p", 42))}`
             },
             cost: pow10(3),
@@ -631,11 +631,11 @@ addLayer("p", {
             title: "P = 101%",
             description: "无限燃料加成机器产量",
             tooltip: "第三日,赐以产量",
-            effect: function () {
+            effect(){
                 return (_D2.add(player.P.Inf)).log2().pow(_D3)
                     .pow(hasUpgrade("p", 46) ? upgradeEffect("p", 46) : _D1)
             },
-            effectDisplay: function () {
+            effectDisplay(){
                 return `×${format(upgradeEffect("p", 43))}`
             },
             cost: pow10(9),
@@ -662,11 +662,11 @@ addLayer("p", {
             title: "3.141592653589",
             description: "无限燃料加成割圆术的效果",
             tooltip: "第五日,赐以原神",
-            effect: function () {
+            effect(){
                 return (_D2.add(player.P.Inf)).log2().pow(_D(0.75))
                     .pow(hasUpgrade("p", 46) ? upgradeEffect("p", 46) : _D1)
             },
-            effectDisplay: function () {
+            effectDisplay(){
                 return `^${format(upgradeEffect("p", 45))}`
             },
             cost: pow10(100),
@@ -681,10 +681,10 @@ addLayer("p", {
             title: "溜溜溜达嘿的赐福",
             description: "无限燃料升级效果^1.031415926",
             tooltip: "第六日,赐以达嘿",
-            effect: function () {
+            effect(){
                 return _D(1.031415926)
             },
-            effectDisplay: function () {
+            effectDisplay(){
                 return `^${format(upgradeEffect("p", 46))}`
             },
             cost: pow10(250),

@@ -498,7 +498,7 @@
       try {
           var opts = {};
           Object.defineProperty(opts, 'passive', {
-              get: function () {
+              get(){
                   /* istanbul ignore next */
                   supportsPassive = true;
               }
@@ -613,7 +613,7 @@
       Object.defineProperty(VNode.prototype, "child", {
           // DEPRECATED: alias for componentInstance for backwards compat.
           /* istanbul ignore next */
-          get: function () {
+          get(){
               return this.componentInstance;
           },
           enumerable: false,
@@ -1278,7 +1278,7 @@
       Object.defineProperty(target, key, {
           enumerable: true,
           configurable: true,
-          get: function () {
+          get(){
               var val = source[key];
               if (isRef(val)) {
                   return val.value;
@@ -1412,11 +1412,11 @@
       Object.defineProperty(proxy, key, {
           enumerable: true,
           configurable: true,
-          get: function () {
+          get(){
               var val = target[key];
               return shallow || !isPlainObject(val) ? val : readonly(val);
           },
-          set: function () {
+          set(){
               warn$2("Set operation on key \"".concat(key, "\" failed: target is readonly."));
           }
       });
@@ -2378,7 +2378,7 @@
       Object.defineProperty(proxy, key, {
           enumerable: true,
           configurable: true,
-          get: function () {
+          get(){
               return instance[type][key];
           }
       });
@@ -3065,7 +3065,7 @@
           };
       }
       var watcherOptions = {
-          before: function () {
+          before(){
               if (vm._isMounted && !vm._isDestroyed) {
                   callHook$1(vm, 'beforeUpdate');
               }
@@ -4833,7 +4833,7 @@
       };
       Object.defineProperty(this, 'scopedSlots', {
           enumerable: true,
-          get: function () {
+          get(){
               return normalizeScopedSlots(parent, data.scopedSlots, this.slots());
           }
       });
@@ -5988,7 +5988,7 @@
           max: [String, Number]
       },
       methods: {
-          cacheVNode: function () {
+          cacheVNode(){
               var _a = this, cache = _a.cache, keys = _a.keys, vnodeToCache = _a.vnodeToCache, keyToCache = _a.keyToCache;
               if (vnodeToCache) {
                   var tag = vnodeToCache.tag, componentInstance = vnodeToCache.componentInstance, componentOptions = vnodeToCache.componentOptions;
@@ -6006,16 +6006,16 @@
               }
           }
       },
-      created: function () {
+      created(){
           this.cache = Object.create(null);
           this.keys = [];
       },
-      destroyed: function () {
+      destroyed(){
           for (var key in this.cache) {
               pruneCacheEntry(this.cache, key, this.keys);
           }
       },
-      mounted: function () {
+      mounted(){
           var _this = this;
           this.cacheVNode();
           this.$watch('include', function (val) {
@@ -6025,10 +6025,10 @@
               pruneCache(_this, function (name) { return !matches(val, name); });
           });
       },
-      updated: function () {
+      updated(){
           this.cacheVNode();
       },
-      render: function () {
+      render(){
           var slot = this.$slots.default;
           var vnode = getFirstComponentChild(slot);
           var componentOptions = vnode && vnode.componentOptions;
@@ -6118,7 +6118,7 @@
       get: isServerRendering
   });
   Object.defineProperty(Vue.prototype, '$ssrContext', {
-      get: function () {
+      get(){
           /* istanbul ignore next */
           return this.$vnode && this.$vnode.ssrContext;
       }
@@ -9164,7 +9164,7 @@
   delete props.mode;
   var TransitionGroup = {
       props: props,
-      beforeMount: function () {
+      beforeMount(){
           var _this = this;
           var update = this._update;
           this._update = function (vnode, hydrating) {
@@ -9222,7 +9222,7 @@
           }
           return h(tag, null, children);
       },
-      updated: function () {
+      updated(){
           var children = this.prevChildren;
           var moveClass = this.moveClass || (this.name || 'v') + '-move';
           if (!children.length || !this.hasMove(children[0].elm, moveClass)) {

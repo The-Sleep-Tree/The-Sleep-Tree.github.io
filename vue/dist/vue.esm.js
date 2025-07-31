@@ -492,7 +492,7 @@ if (inBrowser) {
     try {
         var opts = {};
         Object.defineProperty(opts, 'passive', {
-            get: function () {
+            get(){
                 /* istanbul ignore next */
                 supportsPassive = true;
             }
@@ -607,7 +607,7 @@ var VNode = /** @class */ (function () {
     Object.defineProperty(VNode.prototype, "child", {
         // DEPRECATED: alias for componentInstance for backwards compat.
         /* istanbul ignore next */
-        get: function () {
+        get(){
             return this.componentInstance;
         },
         enumerable: false,
@@ -1293,7 +1293,7 @@ function proxyWithRefUnwrap(target, source, key) {
     Object.defineProperty(target, key, {
         enumerable: true,
         configurable: true,
-        get: function () {
+        get(){
             var val = source[key];
             if (isRef(val)) {
                 return val.value;
@@ -1433,11 +1433,11 @@ function defineReadonlyProperty(proxy, target, key, shallow) {
     Object.defineProperty(proxy, key, {
         enumerable: true,
         configurable: true,
-        get: function () {
+        get(){
             var val = target[key];
             return shallow || !isPlainObject(val) ? val : readonly(val);
         },
-        set: function () {
+        set(){
             process.env.NODE_ENV !== 'production' &&
                 warn$2("Set operation on key \"".concat(key, "\" failed: target is readonly."));
         }
@@ -2405,7 +2405,7 @@ function defineProxyAttr(proxy, key, instance, type) {
     Object.defineProperty(proxy, key, {
         enumerable: true,
         configurable: true,
-        get: function () {
+        get(){
             return instance[type][key];
         }
     });
@@ -3097,7 +3097,7 @@ function mountComponent(vm, el, hydrating) {
         };
     }
     var watcherOptions = {
-        before: function () {
+        before(){
             if (vm._isMounted && !vm._isDestroyed) {
                 callHook$1(vm, 'beforeUpdate');
             }
@@ -4830,7 +4830,7 @@ function FunctionalRenderContext(data, props, children, parent, Ctor) {
     };
     Object.defineProperty(this, 'scopedSlots', {
         enumerable: true,
-        get: function () {
+        get(){
             return normalizeScopedSlots(parent, data.scopedSlots, this.slots());
         }
     });
@@ -5986,7 +5986,7 @@ var KeepAlive = {
         max: [String, Number]
     },
     methods: {
-        cacheVNode: function () {
+        cacheVNode(){
             var _a = this, cache = _a.cache, keys = _a.keys, vnodeToCache = _a.vnodeToCache, keyToCache = _a.keyToCache;
             if (vnodeToCache) {
                 var tag = vnodeToCache.tag, componentInstance = vnodeToCache.componentInstance, componentOptions = vnodeToCache.componentOptions;
@@ -6004,16 +6004,16 @@ var KeepAlive = {
             }
         }
     },
-    created: function () {
+    created(){
         this.cache = Object.create(null);
         this.keys = [];
     },
-    destroyed: function () {
+    destroyed(){
         for (var key in this.cache) {
             pruneCacheEntry(this.cache, key, this.keys);
         }
     },
-    mounted: function () {
+    mounted(){
         var _this = this;
         this.cacheVNode();
         this.$watch('include', function (val) {
@@ -6023,10 +6023,10 @@ var KeepAlive = {
             pruneCache(_this, function (name) { return !matches(val, name); });
         });
     },
-    updated: function () {
+    updated(){
         this.cacheVNode();
     },
-    render: function () {
+    render(){
         var slot = this.$slots.default;
         var vnode = getFirstComponentChild(slot);
         var componentOptions = vnode && vnode.componentOptions;
@@ -6116,7 +6116,7 @@ Object.defineProperty(Vue.prototype, '$isServer', {
     get: isServerRendering
 });
 Object.defineProperty(Vue.prototype, '$ssrContext', {
-    get: function () {
+    get(){
         /* istanbul ignore next */
         return this.$vnode && this.$vnode.ssrContext;
     }
@@ -9165,7 +9165,7 @@ var props = extend({
 delete props.mode;
 var TransitionGroup = {
     props: props,
-    beforeMount: function () {
+    beforeMount(){
         var _this = this;
         var update = this._update;
         this._update = function (vnode, hydrating) {
@@ -9223,7 +9223,7 @@ var TransitionGroup = {
         }
         return h(tag, null, children);
     },
-    updated: function () {
+    updated(){
         var children = this.prevChildren;
         var moveClass = this.moveClass || (this.name || 'v') + '-move';
         if (!children.length || !this.hasMove(children[0].elm, moveClass)) {

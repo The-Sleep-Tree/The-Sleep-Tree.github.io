@@ -456,6 +456,8 @@ function pow10(pow) {
 
 // 核心函数 - 自定义事件驱动
 function myTicking(diff) {
+	player.shown = 1 - player.shown;
+
 	player.gameTime = (player.gameTime.add(timeSpeed().mul(diff)));
 
 	let k;

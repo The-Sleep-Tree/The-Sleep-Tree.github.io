@@ -13,30 +13,28 @@ let modInfo = {
 
 // 在num和name中设置版本号
 let VERSION = {
-	num: "0.3.4 dev",
+	num: "0.4 dev",
 	name: "开发中版本,更新后存档可能不延续"
 }
 
 let changelog = `
-	<h3>[!]0.4版本将会移除萨玛定理第三世界个人电脑之后的层级数据<br></h3>
-	<h1>更新日志:</h1><br><br><br><br>
-	<h2>v0.3.5 | 2025/7/31</h2><br>
-	残局1e15电子<br>
-	修复bug,继续完善萨玛第三世界<br>
+	<h1>更新日志:</h1><br><br>
+	<h2>v0.4 | 2025/7/31</h2><br>
+	残局 6维空间<br>
+	完善萨玛第三世界<br>
 	个性化UI,优化新闻模块<br>
 	<br><br>
 	<h2 class="c1">v0.3.2 | 2025/7/21</h2><br>
 	最初发布版<br>
 	<br><br>
 	<h2>v0.3.1 | 2025/7/20</h2><br>
-	重做萨玛定理第二世界平衡,扩充内容<br>
+	更新了萨玛定理第二世界<br>
 	乾狐离光睡了一觉<br><br>
 	<h2>v0.3 | 2025/7/18</h2><br>
-	搭建了萨玛定理第三世界框架<br>
-	更新了萨玛定理第二世界,增加了一些主线内容<br>
+	增加了一些主线内容<br>
 	修复bug<br><br>
 	<h2>v0.2 | 2025/7/6</h2><br>
-	更新了萨玛定理第一世界,残局70思维+50体验<br><br>
+	更新了萨玛定理第一世界,残局 70思维+50体验<br><br>
 	<h2>v0.1 | 2025/6/20</h2><br>
 	更新了等价交换小游戏<br><br>
 	<h2>v0.0 | 2025/6/16</h2><br>
@@ -112,7 +110,9 @@ function addedPlayerData() {
 		},
 		// 隐藏成就
 		nevergonnagiveyouup: false,
-		error: false
+		error: false,
+		// 更新ui用变量
+		shown: 1
 	}
 }
 
@@ -136,7 +136,7 @@ var displayThings = [
 
 // 决定游戏何时"结束"
 function isEndgame() {
-	return player.s3.points.gte(_D(1e15))
+	return player["S3"].world >= 3
 }
 
 // 后面是次要内容！

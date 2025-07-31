@@ -402,6 +402,7 @@ function hardReset(resetOptions) {
 
 var ticking = false
 
+
 var interval = setInterval(function() {
 	if (player===undefined||tmp===undefined) return;
 	if (ticking) return;

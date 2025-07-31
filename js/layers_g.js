@@ -351,9 +351,9 @@ addLayer("a", {
         },
         1022: {
             name: "👁️ 我看不清了!",
-            tooltip: "[隐藏]迷乱!",
+            tooltip: "[隐藏]我是瞎了吗",
             done() {
-                return options.theme == "psycho"
+                return options.theme == "blind"
             },
             unlocked() { return hasAchievement("a", 1022) },
             style: {
@@ -864,7 +864,7 @@ addLayer("t", {
         },
 
         w01: {
-            title: "世界",
+            title: "你好,世界",
             body() {
                 return `
                 梦境中的世界和宇宙的定义没什么关系,更像是星系,飘散在梦境之中<br>
@@ -874,13 +874,37 @@ addLayer("t", {
                 在世界中,你可以随时间或根据一些其他的因素获得对应的世界能量<br>
                 这些能量能加成你的一系列能力,帮助你的探索<br><br>
                 作为你看了我的奖励,我来给你翻译一下萨玛引理世界各升级的含义<br>
-                升级1 - 按基础时间获得猫猫,猫猫加成最终梦境获取<br>
+                升级1 - 按基础时间流速获得猫猫,猫猫加成最终梦境获取<br>
                 升级2 - 改善猫猫加成最终梦境获取公式<br>
                 升级3 - 将获得猫猫的速度倍增不记得多少倍<br>
                 升级4 - 猫猫加成时间流速<br>
                 升级5 - 解锁略猫区挑战<br>
                 挑战 - 你要击败HP为10000的略猫区,你每秒对其造成正比于猫猫数量的伤害,略猫区每秒会清除你一定比例猫猫
                 ` },
+        },
+        w02: {
+            title: "另一个世界?",
+            body() {
+                return `
+                萨玛定理 - 引理世界是一个相当危险的世界,稍有不慎便会跌落谷底<br>
+                但你会得到我的指引,至少因为你是玩家<br>
+                第一步,选择错数推进器<br>
+                怎么?你看我干嘛,还不快去?
+                ` },
+                unlocked() {
+                    return hasMilestone("m", 6) && hasChallenge("s1", 11)
+                }
+        },
+        w03: {
+            title: "演算",
+            body() {
+                return `
+                很抱歉骗了你,但是这真的很有趣<br>
+                这是一个
+                ` },
+                unlocked() {
+                    return hasChallenge("s2", 11)
+                }
         }
     },
     startData() {
@@ -902,6 +926,8 @@ addLayer("t", {
         World: {
             content: [
                 ["infobox", "w01"],
+                ["infobox", "w02"],
+                ["infobox", "w03"],
             ],
             unlocked() {
                 return hasMilestone("m", 5)

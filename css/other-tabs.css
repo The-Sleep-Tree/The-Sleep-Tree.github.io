@@ -72,7 +72,7 @@
 }
 
 a {
-	color: #007fff;
+	color: var(--points);
 	text-decoration-line: none;
 	cursor: pointer
 }
