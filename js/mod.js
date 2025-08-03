@@ -13,7 +13,7 @@ let modInfo = {
 
 // 在num和name中设置版本号
 let VERSION = {
-	num: 0.5,
+	num: 1.0,
 	name: "开发中版本,更新后存档可能不延续"
 }
 
@@ -142,7 +142,7 @@ var displayThings = [
 
 // 决定游戏何时"结束"
 function isEndgame() {
-	return player["S3"].world >= 6
+	return hasUpgrade("s3",42)
 }
 
 // 后面是次要内容！

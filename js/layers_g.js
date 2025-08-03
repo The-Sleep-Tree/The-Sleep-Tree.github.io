@@ -609,6 +609,19 @@ addLayer("a", {
                 player.achievementsSpeed = player.achievementsSpeed.mul(1.1)
             }
         },
+        3006: {
+            name: "🍸️ 狂乱鸡尾酒",
+            tooltip: "[限定]你......?",
+            done() { return options.count == "wtf" || options.theme == "blind" || options.font == "Mathd" },
+            unlocked() { return hasAchievement("a", 3006) },
+            style: {
+                color: "#FFFFFF",
+                backgroundColor: "#eb72ff"
+            },
+            onComplete() {
+                player.achievementsSpeed = player.achievementsSpeed.mul(1.1)
+            }
+        },
         4001: {
             name: "等价交换",
             tooltip: "[小游戏]解锁等价交换<br>你明明知道这里只能等,为什么还愿意等5分钟?",
