@@ -531,6 +531,19 @@ addLayer("a", {
                 player.achievementsSpeed = player.achievementsSpeed.mul(1.1)
             }
         },
+        2003: {
+            name: "⚛️ 科技世界",
+            tooltip: "[世界]完成 萨玛定理:引理 世界",
+            done() { return hasUpgrade("s3", 42) },
+            unlocked() { return hasAchievement("a", 2003) },
+            style: {
+                color: "#FFFFFF",
+                backgroundColor: "#17f9d4"
+            },
+            onComplete() {
+                player.achievementsSpeed = player.achievementsSpeed.mul(1.1)
+            }
+        },
         3001: {
             name: "😪 完全睡过头",
             tooltip: "[限定]一觉睡了12小时<br>为了补偿你的挂机,我给你这个成就",

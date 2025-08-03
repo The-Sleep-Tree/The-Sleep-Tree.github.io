@@ -2262,7 +2262,7 @@ addLayer("s3", {
             effect() {
                 return _D3
             },
-            done() { return player["S3"].world >= 6 },
+            done() { return player["S3"].world >= 7 },
             unlocked() { return this.done() }
         },
         //.mul(hasMilestone(this.layer, 0) ? layers[this.layer].milestones[0].effect() : _D1)
