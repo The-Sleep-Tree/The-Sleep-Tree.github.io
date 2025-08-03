@@ -39,14 +39,14 @@ addLayer("m", {
     baseAmount() {
         return player.points
     },
-    requires(){
+    requires() {
         return !hasMilestone("m", 0) ? _D50 :
             _D(35)
     },
-    exponent(){
+    exponent() {
         return _D(1)
     },
-    base(){
+    base() {
         return _D2
             .sub((hasUpgrade("e", 15) ? upgradeEffect("e", 15) : _D0))
             .sub((hasUpgrade("e", 31) ? upgradeEffect("e", 31)[1] : _D0))
@@ -163,10 +163,10 @@ addLayer("m", {
         11: {
             title: "[11]时间洪流怀表",
             description: "台座效果:基础时间流速变为×60",
-            effect(){
+            effect() {
                 return _D60
             },
-            effectDisplay(){
+            effectDisplay() {
                 return `×${format(upgradeEffect("m", 11))}`
             },
             tooltip: "等价交换平衡破坏者<br>但在这里只是刚刚开始",
@@ -175,7 +175,7 @@ addLayer("m", {
         12: {
             title: "[12]重新思索",
             description: "使用我寻思之力,思维加成梦境获取",
-            effect(){
+            effect() {
                 return hasUpgrade("e", 12) ?
                     _D2
                         .add(
@@ -189,7 +189,7 @@ addLayer("m", {
                             _D1.add(player[this.layer].points).log2()
                         )
             },
-            effectDisplay(){
+            effectDisplay() {
                 return `×${format(upgradeEffect("m", 12))}`
             },
             tooltip: "要多想",
@@ -201,10 +201,10 @@ addLayer("m", {
         13: {
             title: "[13]洞察真实",
             description: "显示当前游戏时间<br>并将时间流速×1.01",
-            effect(){
+            effect() {
                 return _D(1.01)
             },
-            effectDisplay(){
+            effectDisplay() {
                 return `×${format(upgradeEffect("m", 13))}`
             },
             tooltip: "什么,原来我忘记加当前游戏时间显示了!",
@@ -216,10 +216,10 @@ addLayer("m", {
         14: {
             title: "[14]幻想沉溺",
             description: "醒着时获得睡眠时获取量^0.5的梦境<br>醒时梦境获取加成在此之后计算",
-            effect(){
+            effect() {
                 return divNum(_D2)
             },
-            effectDisplay(){
+            effectDisplay() {
                 return `^${format(upgradeEffect("m", 14))}`
             },
             tooltip: "它到底有什么用呢?",
@@ -230,10 +230,10 @@ addLayer("m", {
         },
         15: {
             title: "[15]天堂制造",
-            description(){
+            description() {
                 return "解锁一个机器<br>你可以加速时间<br>代价是期间点数获取除以加速倍速" + (hasMilestone("m", 4) ? "" : "平方")
             },
-            effect(){
+            effect() {
                 return _D5
                     .mul(hasUpgrade("m", 24) ? upgradeEffect("m", 24) : _D1)
             },
@@ -246,11 +246,11 @@ addLayer("m", {
         21: {
             title: "[21]时之加冕",
             description: "游戏时间加成梦境获取",
-            effect(){
+            effect() {
                 return player.gameTime.div(_D(6000)).add(_D1).log(2.5).add(_D1)
                     .pow((hasUpgrade("m", 31) ? upgradeEffect("m", 31) : _D1))
             },
-            effectDisplay(){
+            effectDisplay() {
                 return `×${format(upgradeEffect("m", 21))}`
             },
             tooltip: "不要一脸正经的说出这种话啊...",
@@ -261,14 +261,14 @@ addLayer("m", {
         },
         22: {
             title: "[22]回响再现",
-            description(){
-                return `上一次汲取思维时的梦境数被记录,并加成${hasUpgrade("e", 21) ? "醒时和总" : "醒时"}梦境获取`
+            description() {
+                return `上一次汲取思维时的梦境数被记录,并加成${hasUpgrade("e", 21) ? "" : "醒时"}梦境获取`
             },
-            effect(){
-                return (player.mindDream).pow(_D(0.25)).add(_D1)
+            effect() {
+                return (player.mindDream).pow(_D(0.3)).add(_D1)
                     .pow((hasUpgrade("m", 31) ? upgradeEffect("m", 31) : _D1))
             },
-            effectDisplay(){
+            effectDisplay() {
                 return `×${format(upgradeEffect("m", 22))}`
             },
             tooltip: "你没办法阻止一切噪音",
@@ -280,9 +280,9 @@ addLayer("m", {
         23: {
             title: "[23]与时俱进",
             description: "游戏时间加成Mv1",
-            effect(){
+            effect() {
                 return (hasUpgrade("m", 34) ?
-                    player.gameTime.div(_D(32400)).add(_D1)
+                    player.gameTime.div(_D(28800)).add(_D1)
                         .pow(_D(0.95))
                     :
                     player.gameTime.div(_D(43200)).add(_D1)
@@ -291,7 +291,7 @@ addLayer("m", {
                     .pow(_D(0.75))
                     .pow((hasUpgrade("m", 31) ? upgradeEffect("m", 31) : _D1))
             },
-            effectDisplay(){
+            effectDisplay() {
                 return `×${format(upgradeEffect("m", 23))}`
             },
             tooltip: "我一直在变大~~~~~",
@@ -303,12 +303,12 @@ addLayer("m", {
         24: {
             title: "[24]时间膨胀",
             description: "思维升级21加成游戏时间倍增器速度",
-            effect(){
+            effect() {
                 let e = upgradeEffect("m", 21)
                 if (e.gte(_D(12))) e = e.div(_D(12)).pow(0.5).mul(_D(12))
                 return e
             },
-            effectDisplay(){
+            effectDisplay() {
                 return `×${format(upgradeEffect("m", 24))}${upgradeEffect("m", 24).gte(_D(12)) ? "<br>软上限在×12" : ""}`
             },
             tooltip: "时间加速时间加速加速",
@@ -329,10 +329,10 @@ addLayer("m", {
         31: {
             title: "[31]螺旋升天",
             description: "以一种非常螺旋升天的姿势加强思维升级21~23的效果至^1.14514",
-            effect(){
+            effect() {
                 return _D(1.14514)
             },
-            effectDisplay(){
+            effectDisplay() {
                 return `^${format(upgradeEffect("m", 31))}`
             },
             tooltip: "草率的升级,草饲了我",
@@ -344,10 +344,10 @@ addLayer("m", {
         32: {
             title: "[32]狗白兔沃",
             description: "正态随机发生器速度和效果×2.5",
-            effect(){
+            effect() {
                 return 2.5
             },
-            effectDisplay(){
+            effectDisplay() {
                 return `×${format(upgradeEffect("m", 32))}`
             },
             tooltip: "Go back to work",
@@ -377,10 +377,10 @@ addLayer("m", {
         35: {
             title: "[35]无尽抽卡",
             description: "游戏时间倍速器可加速正态随机发生器(硬上限:×80)",
-            effect(){
+            effect() {
                 return Decimal.min(_D(80), clickableEffect("m", 11)[0])
             },
-            effectDisplay(){
+            effectDisplay() {
                 return `×${format(upgradeEffect("m", 35))}`
             },
             tooltip: "你现在有1,000,000,000张卡可以抽",
@@ -392,7 +392,7 @@ addLayer("m", {
         41: {
             title: "[41]舒适的床",
             description: "每日睡眠时间提升至8小时,强化体验升级14",
-            effect(){
+            effect() {
                 return _D(7200)
             },
             tooltip: "一张床就能让你的人生变得更美妙,不是吗?",
@@ -420,12 +420,21 @@ addLayer("m", {
             }
         },
         44: {
-            title: "[44]",
-            description: "",
+            title: "[44]与你告别",
+            description: "思维和体验将陪你走过在这里的最后一段时光",
             tooltip: "",
-            cost: _D(120),
+            cost: _D(200),
             unlocked() {
-                return hasUpgrade(this.layer, 43)
+                return hasUpgrade(this.layer, 43) && hasChallenge("s2", 11)
+            }
+        },
+        45: {
+            title: "[45]晚安,思维",
+            description: "",
+            tooltip: "作者玩到这花了1天10小时8分40.961秒",
+            cost: _D(300),
+            unlocked() {
+                return hasUpgrade(this.layer, 44)
             }
         },
     },
@@ -436,10 +445,10 @@ addLayer("m", {
             done() { return player[this.layer].points.gte(_D1) }
         },
         1: {
-            requirementDescription(){
+            requirementDescription() {
                 return ifElseVirable("hasMilestone('m',0)", "v", "randomString(v.length)", `"2思维 | 敌人比我们想象中的要弱,吗?"`)
             },
-            effectDescription(){
+            effectDescription() {
                 return `${ifElseVirable("hasMilestone('m',1)", "v", "randomString(v.length)",
                     `"你也许也意识到了这件事,旅船是掩盖未来的虚像,后面忘了"`
                 )}
@@ -456,10 +465,10 @@ addLayer("m", {
             done() { return player[this.layer].points.gte(_D2) }
         },
         2: {
-            requirementDescription(){
+            requirementDescription() {
                 return ifElseVirable("hasMilestone('m',1)", "v", "randomString(v.length)", `"3思维 | Are You Lost?"`)
             },
-            effectDescription(){
+            effectDescription() {
                 return `${ifElseVirable("hasMilestone('m',2)", "v", "randomString(v.length)",
                     `"梦核是一种超现实主义美学,以媒体为介质,描绘与梦境有关的情景"`
                 )}
@@ -476,10 +485,10 @@ addLayer("m", {
             done() { return player[this.layer].points.gte(_D3) }
         },
         3: {
-            requirementDescription(){
+            requirementDescription() {
                 return ifElseVirable("hasMilestone('m',2)", "v", "randomString(v.length)", `"6思维 | 一重界定"`)
             },
-            effectDescription(){
+            effectDescription() {
                 return `${ifElseVirable("hasMilestone('m',3)", "v", "randomString(v.length)",
                     `"|刻度界定时间,混沌初现涟漪|引力折叠虚无,星辰凝结成诗|"`
                 )}
@@ -496,10 +505,10 @@ addLayer("m", {
             done() { return player[this.layer].points.gte(_D6) }
         },
         4: {
-            requirementDescription(){
+            requirementDescription() {
                 return ifElseVirable("hasMilestone('m',3)", "v", "randomString(v.length)", `"20思维 | 时间的代价"`)
             },
-            effectDescription(){
+            effectDescription() {
                 return `${ifElseVirable("hasMilestone('m',4)", "v", "randomString(v.length)",
                     `"玩弄时间的人啊,你可否看到世界在你眼前展开?"`
                 )}
@@ -516,10 +525,10 @@ addLayer("m", {
             done() { return player[this.layer].points.gte(_D(20)) }
         },
         5: {
-            requirementDescription(){
+            requirementDescription() {
                 return ifElseVirable("hasMilestone('m',4)", "v", "randomString(v.length)", `"40思维 | 萨玛定理"`)
             },
-            effectDescription(){
+            effectDescription() {
                 return `${ifElseVirable("hasMilestone('m',5)", "v", "randomString(v.length)",
                     `"你不知道为什么你会听到这个词,但它就存在于这里"`
                 )}
@@ -536,10 +545,10 @@ addLayer("m", {
             done() { return player[this.layer].points.gte(_D(40)) }
         },
         6: {
-            requirementDescription(){
+            requirementDescription() {
                 return ifElseVirable("hasMilestone('m',5)", "v", "randomString(v.length)", `"80思维 | 梦间游离之物"`)
             },
-            effectDescription(){
+            effectDescription() {
                 return `${ifElseVirable("hasMilestone('m',6)", "v", "randomString(v.length)",
                     `"你是一个在锻造屋工作的年轻人,突然有一天,店长找到你告诉你他欠了10亿元"`
                 )}
@@ -555,11 +564,31 @@ addLayer("m", {
             },
             done() { return player[this.layer].points.gte(_D(80)) }
         },
+        7: {
+            requirementDescription() {
+                return ifElseVirable("hasMilestone('m',6)", "v", "randomString(v.length)", `"160思维 | 忘却思考"`)
+            },
+            effectDescription() {
+                return `${ifElseVirable("hasMilestone('m',7)", "v", "randomString(v.length)",
+                    `"远处传来的声音警告着你,如果再进行这样危险的探索,你很可能灰飞烟灭"`
+                )}
+                    <br>
+                    ${ifElseVirable("hasMilestone('m',7)", "v", "randomString(v.length)",
+                    `"作者也友情的提示你,你可能将在不久之后开始骂作者"`
+                )}
+                    <br>
+                    ${ifElseVirable("hasMilestone('m',7)", "v", "randomString(v.length)",
+                    `"解锁一个新世界当萨玛定理:引理完成"`
+                )}
+                    `
+            },
+            done() { return player[this.layer].points.gte(_D(160)) }
+        },
         10: {
-            requirementDescription(){
+            requirementDescription() {
                 return ifElseVirable("hasMilestone('m',10)", "v", "randomString(v.length)", `"Inf思维 | 和我一起做梦,好么"`)
             },
-            effectDescription(){
+            effectDescription() {
                 return `${ifElseVirable("hasMilestone('m',10)", "v", "randomString(v.length)",
                     `"解锁一个思维挑战"`
                 )}
@@ -573,14 +602,20 @@ addLayer("m", {
                 )}
                     `
             },
+            unlocked() { },
             done() { return player[this.layer].points.gte(_DInf) }
         },
     },
+    resetsNothing() {
+        return hasUpgrade(this.layer, 34)
+    },
     onPrestige(gain) {
-        if (!hasUpgrade("m", 43)) player.gameTime = _D0
-        player.M.Mv[2] = _D1
-        player.M.PreMv[2] = _D1
-        player.M.Mv[3] = _D1
+        if (!hasUpgrade(this.layer, 34)) {
+            if (!hasUpgrade("m", 43)) player.gameTime = _D0
+            player.M.Mv[2] = _D1
+            player.M.PreMv[2] = _D1
+            player.M.Mv[3] = _D1
+        }
     },
     doReset(resettingLayer) {
         player.mindDream = player[this.layer].recPoints
@@ -663,13 +698,13 @@ addLayer("e", {
     baseAmount() {
         return player.points
     },
-    requires(){
+    requires() {
         return _D(1000)
     },
-    exponent(){
+    exponent() {
         return _D(1.1)
     },
-    base(){
+    base() {
         return _D(2)
             .sub(hasChallenge("s1", 11) ? _D(0.1) : _D(0))
             .sub(hasChallenge("s2", 11) ? _D(0.1) : _D(0))
@@ -715,13 +750,13 @@ addLayer("e", {
         },
         14: {
             title: "[14]反睡眠",
-            description(){
+            description() {
                 return hasUpgrade("m", 41) ? "时间流速×3" : "睡眠时时间流速×2"
             },
-            effect(){
+            effect() {
                 return hasUpgrade("m", 41) ? _D3 : _D2
             },
-            effectDisplay(){
+            effectDisplay() {
                 return `×${format(upgradeEffect("e", 14))}`
             },
             tooltip: "你不想再睡觉任何一点",
@@ -733,10 +768,10 @@ addLayer("e", {
         15: {
             title: "[15]反成本",
             description: "汲取思维成本指数-0.4",
-            effect(){
+            effect() {
                 return _D(0.4)
             },
-            effectDisplay(){
+            effectDisplay() {
                 return `-^${format(upgradeEffect("e", 15))}`
             },
             tooltip: "你是资本家,你要降本增笑了",
@@ -747,7 +782,7 @@ addLayer("e", {
         },
         21: {
             title: "[21]反清醒",
-            description: "思维升级22的效果额外加成梦境获取",
+            description: "思维升级22的效果变为加成梦境获取",
             tooltip: "你不想再清醒任何一点",
             cost: _D5,
             unlocked() {
@@ -785,10 +820,10 @@ addLayer("e", {
             title: "[25]反低效",
             description: "大幅增强思维升级12的效果",
             tooltip: "你想要更极致的,更纯粹的...",
-            effect(){
+            effect() {
                 return _D(0.5)
             },
-            effectDisplay(){
+            effectDisplay() {
                 return `+^${format(upgradeEffect("e", 25))}`
             },
             cost: _D(25),
@@ -800,12 +835,12 @@ addLayer("e", {
             title: "[31]正回路",
             description: "汲取思维成本/10,指数-0.05",
             tooltip: "等等,正反是不是要湮灭了?",
-            effect(){
+            effect() {
                 return [
                     _D(5), _D(0.05)
                 ]
             },
-            effectDisplay(){
+            effectDisplay() {
                 return `/${format(upgradeEffect("e", 31)[0])}<br>-^${format(upgradeEffect("e", 31)[1])}`
             },
             cost: _D(35),
@@ -825,10 +860,28 @@ addLayer("e", {
         33: {
             title: "[33]正音乐",
             description: "获得groove 33edo<br>因为浏览器原因不能自动播放",
-            tooltip: "",
+            tooltip: "全体坐下,欣赏音乐!",
             cost: _D(55),
             unlocked() {
-                return hasUpgrade(this.layer, 25)
+                return true
+            }
+        },
+        34: {
+            title: "[34]正倒退",
+            description: "汲取思维不再重置任何东西",
+            tooltip: "似乎没有什么能再重置了",
+            cost: _D(100),
+            unlocked() {
+                return hasUpgrade(this.layer, 33)
+            }
+        },
+        35: {
+            title: "[35]正里程",
+            description: "解锁一个思维里程碑",
+            tooltip: "",
+            cost: _D(200),
+            unlocked() {
+                return hasUpgrade(this.layer, 34)
             }
         },
     },

@@ -177,6 +177,91 @@ addLayer("a", {
                 player.achievementsSpeed = player.achievementsSpeed.mul(1.01)
             }
         },
+        42: {
+            name: "选择题",
+            tooltip: "做一道选择题",
+            done() { return hasUpgrade("s2", 61) || hasUpgrade("s2", 62) || hasUpgrade("s2", 63) || hasUpgrade("s2", 64) },
+            onComplete() {
+                player.achievementsSpeed = player.achievementsSpeed.mul(1.01)
+            }
+        },
+        43: {
+            name: "鲤鱼跃龙门",
+            tooltip: "跳过这个门槛之后,你就可以把这个恶心的东西关掉了",
+            done() { return hasUpgrade("s2", 65) },
+            onComplete() {
+                player.achievementsSpeed = player.achievementsSpeed.mul(1.01)
+            }
+        },
+        44: {
+            name: "众人将与一人告别",
+            tooltip: "做好逐渐挖掘世界秘密的准备",
+            done() { return hasUpgrade("m", 44) },
+            onComplete() {
+                player.achievementsSpeed = player.achievementsSpeed.mul(1.01)
+            }
+        },
+        45: {
+            name: "三维",
+            tooltip: "你现在在三维",
+            done() { return hasMilestone("s3", 1) },
+        },
+        46: {
+            name: "四维",
+            tooltip: "你现在在四维",
+            done() { return hasMilestone("s3", 2) },
+            onComplete() {
+                player.achievementsSpeed = player.achievementsSpeed.mul(1.01)
+            }
+        },
+        51: {
+            name: "五维",
+            tooltip: "你现在在五维",
+            done() { return hasMilestone("s3", 3) },
+            onComplete() {
+                player.achievementsSpeed = player.achievementsSpeed.mul(1.01)
+            }
+        },
+        52: {
+            name: "六维",
+            tooltip: "你现在在六维",
+            done() { return hasMilestone("s3", 4) },
+            onComplete() {
+                player.achievementsSpeed = player.achievementsSpeed.mul(1.01)
+            }
+        },
+        53: {
+            name: "七维",
+            tooltip: "你现在在七维",
+            done() { return hasMilestone("s3", 5) },
+            onComplete() {
+                player.achievementsSpeed = player.achievementsSpeed.mul(1.01)
+            }
+        },
+        54: {
+            name: "八维",
+            tooltip: "你现在在八维",
+            done() { return hasMilestone("s3", 6) },
+            onComplete() {
+                player.achievementsSpeed = player.achievementsSpeed.mul(1.01)
+            }
+        },
+        55: {
+            name: "九维",
+            tooltip: "你现在在九维",
+            done() { return hasMilestone("s3", 7) },
+            onComplete() {
+                player.achievementsSpeed = player.achievementsSpeed.mul(1.01)
+            }
+        },
+        56: {
+            name: "萨玛定理是一个定理",
+            tooltip: "\\ToT/\\ToT/\\ToT/",
+            done() { return hasMilestone("s3", 8) },
+            onComplete() {
+                player.achievementsSpeed = player.achievementsSpeed.mul(1.01)
+            }
+        },
         //特殊成就
         1001: {
             name: "🦊 Fox Style",
@@ -398,6 +483,19 @@ addLayer("a", {
             name: "🔋 成就增量",
             tooltip: "[隐藏]成就速度达到5倍",
             done() { return player.achievementsSpeed.gte(_D5) },
+            unlocked() { return hasAchievement("a", 1025) },
+            style: {
+                color: "#FFFFFF",
+                backgroundColor: "#FFD700"
+            },
+            onComplete() {
+                player.achievementsSpeed = player.achievementsSpeed.mul(1.05)
+            }
+        },
+        1026: {
+            name: "😔 百年孤独",
+            tooltip: "[隐藏]游戏时间达到100年",
+            done() { return player.gameTime.gte(_D(100*365*24*60*60)) },
             unlocked() { return hasAchievement("a", 1025) },
             style: {
                 color: "#FFFFFF",
@@ -900,7 +998,8 @@ addLayer("t", {
             body() {
                 return `
                 很抱歉骗了你,但是这真的很有趣<br>
-                这是一个
+                这是一个你的故事,关于你逐渐地科技进步,直到找到宇宙的答案<br>
+                但,也许答案只是一个数字?
                 ` },
                 unlocked() {
                     return hasChallenge("s2", 11)

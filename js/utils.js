@@ -456,6 +456,8 @@ function pow10(pow) {
 
 // 核心函数 - 自定义事件驱动
 function myTicking(diff) {
+	if (diff < 0) return;
+
 	player.shown = 1 - player.shown;
 
 	player.gameTime = (player.gameTime.add(timeSpeed().mul(diff)));
@@ -517,6 +519,7 @@ function sleepGain() {
 		.mul(hasUpgrade("m", 25) ? player.M.Mv[2] : _D1)
 		.mul(hasUpgrade("m", 42) ? player.M.Mv[3] : _D1)
 		.mul(Boolean(getClickableState("m", 11)) ? clickableEffect("m", 11)[1] : _D1)
+		.mul(hasUpgrade("s3", 43) ? upgradeEffect("s3", 43) : _D1)
 }
 
 // 核心函数 - 醒着时点数获取
@@ -529,7 +532,7 @@ function awakeGain() {
 					_D1
 						.mul(hasUpgrade("m", 14) ? upgradeEffect("m", 14) : _D1)
 				)
-				.mul((hasUpgrade("m", 22) ? upgradeEffect("m", 22) : _D1))
+				.mul((!hasUpgrade("e", 21) && hasUpgrade("m", 22) ? upgradeEffect("m", 22) : _D1))
 	}
 	return sleepGain();
 }
@@ -567,6 +570,7 @@ function isSleep() {
 function sleepTime() {
 	return player.sleepTime
 		.add(hasUpgrade("m", 41) ? upgradeEffect("m", 41) : _D0)
+		.add(hasMilestone("s3", 5) ? layers["s3"].milestones[5].effect().mul(3600) : _D0)
 }
 
 // 显示函数
@@ -575,52 +579,52 @@ function showGameTime() {
 }
 
 function getYFromOrderedPoints(points, x) {
-    // 将输入x转换为Decimal
-    const xDec = new Decimal(x);
-    
-    // 检查点数列是否为空
-    if (!points || points.length === 0) {
-        return new Decimal(NaN);
-    }
-    
-    // 检查x是否在定义域内
-    const firstX = new Decimal(points[0][0]);
-    const lastX = new Decimal(points[points.length - 1][0]);
-    
-    if (xDec.lt(firstX) || xDec.gt(lastX)) {
-        return new Decimal(NaN);
-    }
-    
-    // 二分查找优化（适用于大数组）
-    let left = 0;
-    let right = points.length - 1;
-    
-    while (left <= right) {
-        const mid = Math.floor((left + right) / 2);
-        const midX = new Decimal(points[mid][0]);
-        
-        if (xDec.eq(midX)) {
-            // 精确匹配，直接返回对应的y值
-            return new Decimal(points[mid][1]);
-        } else if (xDec.lt(midX)) {
-            right = mid - 1;
-        } else {
-            left = mid + 1;
-        }
-    }
-    
-    // 获取区间两端的点
-    const x1 = new Decimal(points[left - 1][0]);
-    const y1 = new Decimal(points[left - 1][1]);
-    const x2 = new Decimal(points[left][0]);
-    const y2 = new Decimal(points[left][1]);
-    
-    // 线性插值: y = y1 + (y2 - y1) * (x - x1) / (x2 - x1)
-    return y1.plus(
-        y2.minus(y1)
-          .times(xDec.minus(x1))
-          .dividedBy(x2.minus(x1))
-    );
+	// 将输入x转换为Decimal
+	const xDec = new Decimal(x);
+
+	// 检查点数列是否为空
+	if (!points || points.length === 0) {
+		return new Decimal(NaN);
+	}
+
+	// 检查x是否在定义域内
+	const firstX = new Decimal(points[0][0]);
+	const lastX = new Decimal(points[points.length - 1][0]);
+
+	if (xDec.lt(firstX) || xDec.gt(lastX)) {
+		return new Decimal(NaN);
+	}
+
+	// 二分查找优化（适用于大数组）
+	let left = 0;
+	let right = points.length - 1;
+
+	while (left <= right) {
+		const mid = Math.floor((left + right) / 2);
+		const midX = new Decimal(points[mid][0]);
+
+		if (xDec.eq(midX)) {
+			// 精确匹配，直接返回对应的y值
+			return new Decimal(points[mid][1]);
+		} else if (xDec.lt(midX)) {
+			right = mid - 1;
+		} else {
+			left = mid + 1;
+		}
+	}
+
+	// 获取区间两端的点
+	const x1 = new Decimal(points[left - 1][0]);
+	const y1 = new Decimal(points[left - 1][1]);
+	const x2 = new Decimal(points[left][0]);
+	const y2 = new Decimal(points[left][1]);
+
+	// 线性插值: y = y1 + (y2 - y1) * (x - x1) / (x2 - x1)
+	return y1.plus(
+		y2.minus(y1)
+			.times(xDec.minus(x1))
+			.dividedBy(x2.minus(x1))
+	);
 }
 
 // 你知道的太多了
@@ -668,7 +672,7 @@ function getNewsList() {
 				"我可以用新闻栏播彩六,对吧!",
 				"我不让你按按钮你按不按?你Studio按!",
 				"睡觉树开发者因为凌晨3点开发睡觉树而被从游戏除名",
-				"晚宀 = 晚安没女,我这辈子也想不出这种东西",
+				"晚宀=晚安没女,我这辈子也想不出这种东西",
 				"你还不能睡觉,睡觉树在等着你玩",
 				"一觉醒来,我一觉醒来,而我不变",
 				"我们要辩证的熬夜,认清楚什么样的熬夜才是好的,才是人民需要的",
@@ -724,6 +728,7 @@ function getNewsList() {
 				"本台记者因拖延症未能及时报道这条新闻",
 				"路易十六笑话是无厘头笑话吗",
 				' <img src="./resources/pic1.jpg" width="60px">',
+				' <img src="./resources/pic2.gif" width="60px">',
 				"@生产睡觉树的我睡觉时生产睡觉树",
 				"白 白 东东东东 南南南南 西西西西 北北北北",
 				"MISS☆<<<<<<<<<<<<<<<",
@@ -734,6 +739,25 @@ function getNewsList() {
 				"你因为阅读本新闻,将受到游戏停止1小时的惩罚",
 				"我要采一朵花,送给狐狸,狐狸狐狸,你看,有花!睡觉树玩了没有?!呜呜呜~",
 				"木棍木棍木棍木棍木棍木棍木棍木棍木棍木棍木棍木棍木棍木棍",
+				"作者要征集一些news,于是我来了",
+				"你现在不能睡觉,因为作者说了睡觉前要挂时间墙",
+				"听说作者要生产一个全是时间的层级,赶紧拦着他,不然他就要哗哗塞时间墙了",
+				"❤我要时间你们❤",
+				"我的意思是...不,不是这样...我的意思是...不...我想,你的意思是...哦天哪",
+				`你可在控制台输入"player.devSpeed = 1;"以获得一个隐藏成就`,
+				"研究表明你一天有至少24个小时和地球在一起,所以你暗恋的其实不是床,而是地球",
+				"恭喜你看到了这条新闻!系统将送您tan90°%的速度加成!",
+				"你知道吗?无论你是在用什么设备游玩本游戏,你的设备都不会爆炸",
+				"我现在有一个压箱底的笑话想讲给你,但我的箱子找不到了,所以这个笑话讲不出来",
+				"最新消息:上海东方明珠塔因为你正在边喝蜜雪冰城边玩本游戏而准备开始攻击乾狐离光",
+				"你有没有想过睡觉树为什么叫睡觉树?",
+				"我会操死他妈所有开制冷16℃都只有温风的空调",
+				"lalalalava,fofofofoxes",
+				"我想在这里写小作文,不知道你想不想",
+				"都说狐狸写树写的烂,狐狸逼你们看了吗?一直喷一直喷!狐狸逼你们玩了吗?每天就知道喷!做人要将心比心,换位思考,换你写树,我在下面一直喷,你们乐意吗?!要我说,狐狸不仅写树牛逼还好看——改编自ReplicantiGalaxy",
+				"欢迎来到https://localhost:3000",
+				"睡眠文明里,伊博一觉醒来,原来是外面的睡眠警察正在问他要每天8小时的睡眠",
+				"我们这的玉牌脖子上都挂憋佬仔",
 			]
 			: ["解锁思维层第二里程碑以解锁新闻"]
 		),

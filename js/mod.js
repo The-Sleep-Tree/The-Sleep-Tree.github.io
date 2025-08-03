@@ -3,7 +3,7 @@ let modInfo = {
 	id: "the-sleep-tree",
 	author: "乾狐离光",
 	pointsName: "梦境",
-	modFiles: ["layers.js", "layers_s.js", "layers_p.js", "layers_g.js", "tree.js"],
+	modFiles: ["layers.js", "layers_s.js", "layers_p.js", "layers_g.js", "layers_b.js", "tree.js"],
 
 	discordName: "乾狐离光的官网",
 	discordLink: "https://qhlg.flime.top/",
@@ -13,12 +13,15 @@ let modInfo = {
 
 // 在num和name中设置版本号
 let VERSION = {
-	num: "0.4 dev",
+	num: 0.5,
 	name: "开发中版本,更新后存档可能不延续"
 }
 
 let changelog = `
 	<h1>更新日志:</h1><br><br>
+	<h2>v0.5 | 2025/8/3<h2><br>
+	完成萨玛第三世界<br>
+	添加一些内容<br>
 	<h2>v0.4 | 2025/7/31</h2><br>
 	残局 6维空间<br>
 	完善萨玛第三世界<br>
@@ -136,7 +139,7 @@ var displayThings = [
 
 // 决定游戏何时"结束"
 function isEndgame() {
-	return player["S3"].world >= 3
+	return player["S3"].world >= 6
 }
 
 // 后面是次要内容！
@@ -153,4 +156,7 @@ function maxTickLength() {
 // 如果需要修复旧版本存档的数值膨胀问题，使用此函数。如果版本早于修复该问题的版本，
 // 你可以用此函数限制他们当前的资源。
 function fixOldSave(oldVersion) {
+	if (typeof oldVersion == "string") {
+		player.s3.milestones = []
+	}
 }

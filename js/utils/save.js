@@ -304,7 +304,7 @@ function versionCheck() {
 	}
 
 	if (setVersion) {
-		if (player.versionType == getModID() && VERSION.num > player.version) {
+		if (player.versionType == getModID() && (VERSION.num > player.version || typeof player.version == "string")) {
 			player.keepGoing = false;
 			if (fixOldSave)
 				fixOldSave(player.version);

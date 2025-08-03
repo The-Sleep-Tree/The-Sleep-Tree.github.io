@@ -22,14 +22,14 @@ addLayer("p", {
     symbol: "🔴​",
     resource: "EMC",
     color: "#b8306d",
-    row: "side",
+    row: "1",
     tooltip: "",
     position: 2,
     layerShown() { return hasAchievement("a", 4001) },
     infoboxes: {
         introBox1: {
             title: "等价交换",
-            body() { return "这是一个小游戏,你也许知道等价交换中有一种叫做能量收集器的方块,它们可以产生EMC,而EMC可以购买能量收集器<br>很难不把这个写成游戏对吧?<br>尽管如此,这只是一个小游戏,而不会对原游戏流程产生任何影响<br>如果收集器和升级的价格差不多,你也许就该思考一下先买哪个~<br>放心,你有充足的时间(指时间墙)<br>而且它将不会有新层级,所以这可能是无聊的" },
+            body() { return "这是一个小游戏,你也许知道等价交换中有一种叫做能量收集器的方块,它们可以产生EMC,而EMC可以购买能量收集器<br>很难不把这个写成游戏对吧?<br>尽管如此,这只是一个小游戏,而不会对原游戏流程产生除了成就奖励的任何影响<br>如果收集器和升级的价格差不多,你也许就该思考一下先买哪个~<br>放心,你有充足的时间(指时间墙)<br>而且它将不会有新层级,所以这可能是无聊的" },
         },
         introBox2: {
             title: "后日谈(不是日后谈)",
@@ -47,7 +47,7 @@ addLayer("p", {
             content: [
                 ["clickable", 13],
                 ["infobox", "introBox1"],
-                ["display-text", "按P购买最大机器"],
+                ["display-text", "按P购买最大机器,手机端可长按机器以连续购买"],
                 "main-normal-display",
                 ["display-text", function () {
                     return `(${format(layers.p.getEMCGen())}/秒)`
@@ -725,6 +725,7 @@ addLayer("p", {
     hotkeys: [
         {
             key: "p",
+            description: "p: 购买等价交换最大机器",
             onPress() {
                 while (layers.p.buyables[11].canAfford()) {
                     if (getBuyableAmount("p", 11).gte(layers.p.buyables[11].purchaseLimit())) break;
