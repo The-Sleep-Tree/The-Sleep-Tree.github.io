@@ -431,7 +431,7 @@ addLayer("m", {
         45: {
             title: "[45]晚安,思维",
             description: "",
-            tooltip: "作者玩到这花了1天10小时8分40.961秒",
+            tooltip: "作者玩到这花了很多天加10小时8分40.961秒",
             cost: _D(300),
             unlocked() {
                 return hasUpgrade(this.layer, 44)
@@ -584,26 +584,26 @@ addLayer("m", {
             },
             done() { return player[this.layer].points.gte(_D(160)) }
         },
-        10: {
+        8: {
             requirementDescription() {
-                return ifElseVirable("hasMilestone('m',10)", "v", "randomString(v.length)", `"Inf思维 | 和我一起做梦,好么"`)
+                return ifElseVirable("hasMilestone('m',8)", "v", "randomString(v.length)", `"Inf思维 | 和我一起做梦,好么"`)
             },
             effectDescription() {
-                return `${ifElseVirable("hasMilestone('m',10)", "v", "randomString(v.length)",
-                    `"解锁一个思维挑战"`
+                return `${ifElseVirable("hasMilestone('m',8)", "v", "randomString(v.length)",
+                    `"解锁一个挑战世界"`
                 )}
                     <br>
-                    ${ifElseVirable("hasMilestone('m',10)", "v", "randomString(v.length)",
+                    ${ifElseVirable("hasMilestone('m',8)", "v", "randomString(v.length)",
                     `"你将会在挑战中得到你想知道的答案"`
                 )}
                     <br>
-                    ${ifElseVirable("hasMilestone('m',10)", "v", "randomString(v.length)",
+                    ${ifElseVirable("hasMilestone('m',8)", "v", "randomString(v.length)",
                     `"——Napper Rinator"`
                 )}
                     `
             },
-            unlocked() { },
-            done() { return player[this.layer].points.gte(_DInf) }
+            unlocked() { return hasUpgrade('e', 35)},
+            done() { return player[this.layer].points.gte(0) }
         },
     },
     resetsNothing() {
@@ -879,7 +879,9 @@ addLayer("e", {
             title: "[35]正里程",
             description: "解锁一个思维里程碑",
             tooltip: "",
-            cost: _D(200),
+            cost() {
+                return hasUpgrade('s3', 35) ? _D(0) : _D(200)
+            },
             unlocked() {
                 return hasUpgrade(this.layer, 34)
             }
@@ -907,4 +909,5 @@ addLayer("e", {
             unlocked() { return layers[this.layer].layerShown() }
         }
     ],
+    branches: ["c"]
 });

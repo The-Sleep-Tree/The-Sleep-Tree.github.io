@@ -629,7 +629,7 @@ function getYFromOrderedPoints(points, x) {
 
 // 你知道的太多了
 // 避免重复定义开销
-const randomString_chars = `ABCDEFGHJKLMNOPQRSTUWXYZabcdefghijklmnopqrstuwxyz1234567890?!;=+-/@#$%^&*~|\`"'\\()[]{},.          `;
+const randomString_chars = `ABCDEFGHJKLMNOPQRSTUWXYZabcdefghijklmnopqrstuwxyz1234567890?!;=+-/@#$%^&*~|"'()[]{},.          `;
 function randomString(length) {
 	let result = '';
 

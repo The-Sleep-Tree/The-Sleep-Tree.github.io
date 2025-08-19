@@ -5,8 +5,8 @@ addLayer("b",{
     color: "#96126c",
     row: "2",
     tooltip: "",
-    position: 3,
-    layerShown() { return true },
+    position: 2,
+    layerShown() { return hasUpgrade('m', 44) },
     infoboxes: {
         1:{
             body() {
@@ -25,7 +25,7 @@ addLayer("b",{
                 所以,这个游戏的规模不会很大了<br>
                 在完成萨玛系列后,这个游戏就将迎来主线的终结<br>
                 这个结尾是仓促的,我也并不喜欢它...<br>
-                此后将只有小游戏作为普通世界加入<br>
+                此游戏将不再更新<br>
                 请把此游戏当做序章<br>
                 因为,梦的魅力不止于此
                 `
@@ -41,4 +41,5 @@ addLayer("b",{
     tabFormat: [
         ["infobox",1]
     ],
+    branches: ["c","s3"]
 })

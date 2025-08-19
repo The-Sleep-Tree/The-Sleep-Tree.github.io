@@ -164,7 +164,7 @@ addLayer("a", {
         36: {
             name: "游玩激励",
             tooltip: "效果:成就加速×1.01",
-            done() { return hasUpgrade("e",32) },
+            done() { return hasUpgrade("e", 32) },
             onComplete() {
                 player.achievementsSpeed = player.achievementsSpeed.mul(1.01)
             }
@@ -495,7 +495,7 @@ addLayer("a", {
         1026: {
             name: "😔 百年孤独",
             tooltip: "[隐藏]游戏时间达到100年",
-            done() { return player.gameTime.gte(_D(100*365*24*60*60)) },
+            done() { return player.gameTime.gte(_D(100 * 365 * 24 * 60 * 60)) },
             unlocked() { return hasAchievement("a", 1025) },
             style: {
                 color: "#FFFFFF",
@@ -612,7 +612,7 @@ addLayer("a", {
         3006: {
             name: "🍸️ 狂乱鸡尾酒",
             tooltip: "[限定]你......?",
-            done() { return options.count == "wtf" || options.theme == "blind" || options.font == "Mathd" },
+            done() { return options.count == "wtf" && options.theme == "blind" && options.font == "Mathd" },
             unlocked() { return hasAchievement("a", 3006) },
             style: {
                 color: "#FFFFFF",
@@ -1015,9 +1015,9 @@ addLayer("t", {
                 第一步,选择错数推进器<br>
                 怎么?你看我干嘛,还不快去?
                 ` },
-                unlocked() {
-                    return hasMilestone("m", 6) && hasChallenge("s1", 11)
-                }
+            unlocked() {
+                return hasMilestone("m", 6) && hasChallenge("s1", 11)
+            }
         },
         w03: {
             title: "演算",
@@ -1027,9 +1027,9 @@ addLayer("t", {
                 这是一个你的故事,关于你逐渐地科技进步,直到找到宇宙的答案<br>
                 但,也许答案只是一个数字?
                 ` },
-                unlocked() {
-                    return hasChallenge("s2", 11)
-                }
+            unlocked() {
+                return hasChallenge("s2", 11)
+            }
         }
     },
     startData() {

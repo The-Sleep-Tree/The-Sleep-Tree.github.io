@@ -3,7 +3,7 @@ let modInfo = {
 	id: "the-sleep-tree",
 	author: "乾狐离光",
 	pointsName: "梦境",
-	modFiles: ["layers.js", "layers_s.js", "layers_p.js", "layers_g.js", "layers_b.js", "tree.js"],
+	modFiles: ["layers.js", "layers_s.js", "layers_p.js", "layers_g.js", "layers_c.js", "layers_b.js", "tree.js", "newWorld.js"],
 
 	discordName: "乾狐离光的官网",
 	discordLink: "https://qhlg.flime.top/",
@@ -13,12 +13,15 @@ let modInfo = {
 
 // 在num和name中设置版本号
 let VERSION = {
-	num: 1.0,
-	name: "开发中版本,更新后存档可能不延续"
+	num: 1.14514,
+	name: "终局"
 }
 
 let changelog = `
 	<h1>更新日志:</h1><br><br>
+	<h2 class="c1">v1.14514 | 2025/8/19</h2><br>
+	游戏完结
+	<br><br>
 	<h2>v0.5 | 2025/8/3</h2><br>
 	完成萨玛第三世界<br>
 	添加一些内容
@@ -30,8 +33,6 @@ let changelog = `
 	<br><br>
 	<h2 class="c1">v0.3.2 | 2025/7/21</h2><br>
 	最初发布版<br>
-	<br><br>
-	<h2>v0.3.1 | 2025/7/20</h2><br>
 	更新了萨玛定理第二世界<br>
 	乾狐离光睡了一觉
 	<br><br>
@@ -46,7 +47,7 @@ let changelog = `
 	<h2>v0.0 | 2025/6/16</h2><br>
 	更新了基础游戏内容`
 
-let winText = `哦不!你已经玩到这个开发版本的最后了,敬请期待下一个版本的更新!`
+let winText = `游戏内容到此结束了,敬请期待我的下一款树:梦境树`
 
 // 如果在Layer内添加了新函数，并且这些函数在被调用时会产生效果，请在此处添加它们
 var doNotCallTheseFunctionsEveryTick = ["annihilation", "canBuyCount"]
@@ -118,7 +119,9 @@ function addedPlayerData() {
 		nevergonnagiveyouup: false,
 		error: false,
 		// 更新ui用变量
-		shown: 1
+		shown: 1,
+		// 终局变量
+		count: 0
 	}
 }
 
@@ -142,7 +145,7 @@ var displayThings = [
 
 // 决定游戏何时"结束"
 function isEndgame() {
-	return hasUpgrade("s3",42)
+	return hasChallenge("c", 11)
 }
 
 // 后面是次要内容！

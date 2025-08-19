@@ -46,7 +46,7 @@ function sumValues(x) {
     return x.reduce((a, b) => Decimal.add(a, b))
 }
 
-function format(decimal, precision = 3, small) {
+function format(decimal, precision = 3, small, chi) {
     small = small || modInfo.allowSmall
     decimal = new Decimal(decimal)
     if (isNaN(decimal.sign) || isNaN(decimal.layer) || isNaN(decimal.mag)) {
@@ -56,30 +56,34 @@ function format(decimal, precision = 3, small) {
     if (decimal.sign < 0) return "-" + format(decimal.neg(), precision, small)
     if (decimal.mag == Number.POSITIVE_INFINITY) return "Infinity"
 
+    if (options.count == "wtf") {
+        return randomString(5)
+    }
+
+    if (decimal.gte("eeee1000")) {
+        var slog = decimal.slog()
+        if (slog.gte(1e6)) return "F" + format(slog.floor())
+        else return Decimal.pow(10, slog.sub(slog.floor())).toStringWithDecimalPlaces(3) + "F" + commaFormat(slog.floor(), 0)
+    }
+    else if (decimal.gte("1e1000000")) return exponentialFormat(decimal, 0, false)
+    else if (decimal.gte("1e10000")) return exponentialFormat(decimal, 0)
+
     if (options.count == "xex") {
-        if (decimal.gte("eeee1000")) {
-            var slog = decimal.slog()
-            if (slog.gte(1e6)) return "F" + format(slog.floor())
-            else return Decimal.pow(10, slog.sub(slog.floor())).toStringWithDecimalPlaces(3) + "F" + commaFormat(slog.floor(), 0)
-        }
-        else if (decimal.gte("1e1000000")) return exponentialFormat(decimal, 0, false)
-        else if (decimal.gte("1e10000")) return exponentialFormat(decimal, 0)
-        else if (decimal.gte(1e9)) return exponentialFormat(decimal, precision)
+        if (decimal.gte(1e9)) return exponentialFormat(decimal, precision)
         else if (decimal.gte(1e3)) return commaFormat(decimal, 0)
         else if (decimal.gte(0.0001) || !small) return regularFormat(decimal, precision)
         else if (decimal.eq(0)) return (0).toFixed(precision)
     } else if (options.count == "exx") {
-        if (decimal.gte("eeee1000")) {
-            var slog = decimal.slog()
-            if (slog.gte(1e6)) return "F" + format(slog.floor())
-            else return Decimal.pow(10, slog.sub(slog.floor())).toStringWithDecimalPlaces(3) + "F" + commaFormat(slog.floor(), 0)
-        }
-        else if (decimal.gte("1e10000")) return exponentialFormat_exx(decimal, 0)
-        else if (decimal.gte(1e3)) return exponentialFormat_exx(decimal, precision)
+        if (decimal.gte(1e3)) return exponentialFormat_exx(decimal, precision)
         else if (decimal.gte(0.0001) || !small) return regularFormat(decimal, precision)
         else if (decimal.eq(0)) return (0).toFixed(precision)
-    } else if (options.count == "wtf") {
-        return randomString(5)
+    } else if (chi) {
+        const exponent = Decimal.floor(decimal.log10());
+        return regularFormat(decimal, Decimal.max(_D0, precision - exponent))
+    } else if (options.count == "chi") {
+        if (decimal.gte(1e3)) return ChineseCount(decimal, precision)
+        else if (decimal.gte(0.0001) || !small) return regularFormat(decimal, precision)
+        else if (decimal.eq(0)) return (0).toFixed(precision)
     }
 
     decimal = invertOOM(decimal)
@@ -160,8 +164,8 @@ function showTime(time) {
 }
 
 
-function ChineseCount(num) {
-    const d = new Decimal(num);
+function ChineseCount(decimal, precision) {
+    const d = new Decimal(decimal);
 
     if (d.eq(0)) {
         return "0";
@@ -186,21 +190,18 @@ function ChineseCount(num) {
         { base: 60, code: "那由他" },
         { base: 64, code: "不可思议" },
         { base: 68, code: "无量" },
-        { base: 72, code: "大数" },
     ];
 
-    const exponent = d.log10();
+    const exponent = Decimal.floor(d.log10());
 
-    if (exponent.gte(72)) {
-        return format(d);
+    if (decimal.gte(1e72)) {
+        let bignum = Decimal.floor(exponent.div(72))
+        return ChineseCount(d.div(pow10(bignum.mul(72))), precision) + `(大数^${format(bignum, 0)})`;
     }
 
-    const baseIndex = Decimal.min(
-        exponent.div(4).floor(),
-        new Decimal(basenum.length - 1)
-    ).toNumber();
+    const baseIndex = Decimal.floor(exponent.div(4)).toNumber();
 
     const selectedBase = basenum[baseIndex];
 
-    return format(d.div(_D10.pow(new Decimal(selectedBase.base)))) + selectedBase.code;
+    return format(d.div(pow10(new Decimal(selectedBase.base))), precision, false, true) + selectedBase.code;
 }
