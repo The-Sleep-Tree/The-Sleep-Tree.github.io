@@ -544,6 +544,19 @@ addLayer("a", {
                 player.achievementsSpeed = player.achievementsSpeed.mul(1.1)
             }
         },
+        2004: {
+            name: "结束了...",
+            tooltip: "[世界]完成睡觉树",
+            done() { return hasChallenge("c", 11) },
+            unlocked() { return hasAchievement("a", 2004) },
+            style: {
+                color: "#FFFFFF",
+                backgroundColor: "#17f9d4"
+            },
+            onComplete() {
+                player.achievementsSpeed = player.achievementsSpeed.mul(1.1)
+            }
+        },
         3001: {
             name: "😪 完全睡过头",
             tooltip: "[限定]一觉睡了12小时<br>为了补偿你的挂机,我给你这个成就",

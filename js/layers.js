@@ -603,7 +603,7 @@ addLayer("m", {
                     `
             },
             unlocked() { return hasUpgrade('e', 35)},
-            done() { return player[this.layer].points.gte(0) }
+            done() { return player[this.layer].points.gte(0) && hasUpgrade('e', 35) }
         },
     },
     resetsNothing() {
