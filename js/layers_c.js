@@ -15,7 +15,7 @@ addLayer("c", {
     },
     update(diff) {
         if (inChallenge(this.layer, 11)) {
-            player.count += diff / 12
+            player.count += diff * 6
             if (endStr[Math.floor(player.count)] == "<") player.count += 8
         }
     },
