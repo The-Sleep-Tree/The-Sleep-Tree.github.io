@@ -832,7 +832,7 @@ addLayer("e", {
             tooltip: "等等,正反是不是要湮灭了?",
             effect() {
                 return [
-                    _D(5), _D(0.05)
+                    _D(10), _D(0.05)
                 ]
             },
             effectDisplay() {
