@@ -878,7 +878,7 @@ addLayer("e", {
                 return hasUpgrade('s3', 35) ? _D(0) : _D(200)
             },
             unlocked() {
-                return hasUpgrade(this.layer, 34)
+                return hasUpgrade(this.layer, 34) && hasChallenge("s3", 11)
             }
         },
     },
