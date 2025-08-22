@@ -875,10 +875,10 @@ addLayer("e", {
             description: "解锁一个思维里程碑",
             tooltip: "",
             cost() {
-                return hasUpgrade('s3', 35) ? _D(0) : _D(200)
+                return hasUpgrade('s3', 42) ? _D(0) : _DInf
             },
             unlocked() {
-                return hasUpgrade(this.layer, 34) && hasUpgrade("s3", 42)
+                return hasUpgrade(this.layer, 34)
             }
         },
     },
