@@ -602,25 +602,18 @@ addLayer("m", {
                 )}
                     `
             },
-            unlocked() { return hasUpgrade('e', 35)},
+            unlocked() { return hasUpgrade('e', 35) },
             done() { return player[this.layer].points.gte(0) && hasUpgrade('e', 35) }
         },
     },
     onPrestige(gain) {
+        player.mindDream = player[this.layer].recPoints
+        if (!hasUpgrade("e", 34)) {
             if (!hasUpgrade("m", 43)) player.gameTime = _D0
             player.M.Mv[2] = _D1
             player.M.PreMv[2] = _D1
             player.M.Mv[3] = _D1
-    },
-    doReset(resettingLayer) {
-        player.mindDream = player[this.layer].recPoints
-
-        return;
-
-        layerDataReset("m");
-
-        player.m.upgrades.push(11);
-        player.m.milestones.push(0);
+        }
     },
     layerShown() { return true },
     hotkeys: [
