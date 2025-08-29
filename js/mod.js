@@ -13,12 +13,14 @@ let modInfo = {
 
 // 在num和name中设置版本号
 let VERSION = {
-	num: 1.14514,
+	num: 1.2,
 	name: "终局"
 }
 
 let changelog = `
 	<h1>更新日志:</h1><br><br>
+	<h2>v1.2 | 2025/8/29</h2><br>
+	修复完结后发现的一系列bug<br><br>
 	<h2 class="c1">v1.14514 | 2025/8/19</h2><br>
 	游戏完结
 	<br><br>

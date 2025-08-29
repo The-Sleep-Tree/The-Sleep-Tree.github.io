@@ -606,6 +606,9 @@ addLayer("m", {
             done() { return player[this.layer].points.gte(0) && hasUpgrade('e', 35) }
         },
     },
+    resetsNothing(){
+        return hasUpgrade("e", 34)
+    },
     onPrestige(gain) {
         player.mindDream = player[this.layer].recPoints
         if (!hasUpgrade("e", 34)) {
